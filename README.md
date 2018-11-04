@@ -1,3 +1,3 @@
-# alpha-cab
+# Alpha-Cab Ltd Booking System
 
-proposed edit
+Implementation of a web-based booking system for Alpha-Cab Ltd minicab company.
