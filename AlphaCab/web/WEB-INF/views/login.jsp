@@ -4,6 +4,8 @@
     Author     : Paul
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.alphacab.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,5 +15,12 @@
     </head>
     <body>
         <h1>Welcome to Login Page</h1>
+               <%
+                   out.print("hello");
+            List<User> userList = (List<User>)request.getAttribute("userList");
+            for (User u : userList) {
+                out.println("username: " + u.getUsername() + "\tpassword: " + u.getPassword());
+            }
+            %> 
     </body>
 </html>

@@ -4,6 +4,8 @@
     Author     : Paul
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="com.alphacab.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,5 +15,9 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <form method="get" action="UserServlet">
+            
+            <input name="button" type="submit" value="Click here for User Servlet"/>
+        </form>
     </body>
 </html>

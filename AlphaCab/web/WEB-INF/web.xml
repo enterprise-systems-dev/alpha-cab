@@ -10,19 +10,19 @@
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value>password</param-value>
+        <param-value>P@ssw0rd!</param-value>
     </context-param>
     <listener>
         <description>ServletContextListener</description>
         <listener-class>com.alphacab.util.AppContextListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
+        <servlet-name>UserServlet</servlet-name>
         <servlet-class>com.alphacab.controller.UserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/Login</url-pattern>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/UserServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
