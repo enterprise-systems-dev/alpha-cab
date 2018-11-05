@@ -3,7 +3,7 @@
     <context-param>
         <param-name>dbUrl</param-name>
         <param-value>jdbc:derby://localhost:1527/AlphaCab</param-value>
-    </context-param> 
+    </context-param>
     <context-param>
         <param-name>dbUser</param-name>
         <param-value>root</param-value>
@@ -18,7 +18,7 @@
     </listener>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.alphacab.controller.LoginServlet</servlet-class>
+        <servlet-class>com.alphacab.controller.UserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
