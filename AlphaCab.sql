@@ -70,3 +70,16 @@ INSERT INTO Journey (jid, Destination, Distance, id, Registration, Date, Time) V
 (3, '120 Green Lanes, London, N13', 7, 7, 'AK52VZV', '2015-10-15', '06:00:00'),
 (4, '131 Stoke Newington High Road, London, N12', 8, 7, 'AK52VZV', '2015-10-15', '12:00:00'),
 (5, 'Luton Airport, Luton', 30, 1, 'R34AKP', '2015-10-22', '10:00:00');
+
+-- --------------------------------------------------------
+
+--DROP Table "Users";
+CREATE TABLE "Users" (
+  "username" varchar(20) NOT NULL,
+  "password" varchar(20),
+  PRIMARY KEY ("username") 
+) ;
+INSERT INTO "Users" ("username", "password") VALUES('meaydin', '201068');
+INSERT INTO "Users" ("username", "password") VALUES('aydinme', '108752');
+INSERT INTO "Users" ("username", "password") VALUES('csimons', '010563');
+
