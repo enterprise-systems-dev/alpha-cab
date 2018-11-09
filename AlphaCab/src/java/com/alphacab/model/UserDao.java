@@ -27,7 +27,15 @@ public class UserDao {
         this.connection = conn;
     }
     
-    public boolean doesUserExist(User user) {
+    public boolean doesUserExist(User user) throws SQLException {
+        
+        Statement statement = this.connection.createStatement();
+        
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM \"Users\" WHERE \"username\" = '" + user.getUsername() +"' AND \"password\" = '" + user.getPassword() + "'");
+
+        if(resultSet.next()) {
+            return true;
+        }
         
         return false;
     }
