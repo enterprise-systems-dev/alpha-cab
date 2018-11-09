@@ -17,16 +17,16 @@
         <listener-class>com.alphacab.util.AppContextListener</listener-class>
     </listener>
     <servlet>
-        <servlet-name>UserServlet</servlet-name>
-        <servlet-class>com.alphacab.controller.UserServlet</servlet-class>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/UserServlet</url-pattern>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            20
         </session-timeout>
     </session-config>
 </web-app>
