@@ -20,7 +20,8 @@
             <input type="text" name="username-textbox"><br>
             Password:<br>
             <input type="password" name="password-textbox"><br><br>
-            <input name="button" type="submit" value="Login"/>
+            <input name="login-button" type="submit" value="Login"/>
+            <input name="register-button" type="submit" formmethod="get" value="Register"/>
         </form>
     </body>
 </html>
