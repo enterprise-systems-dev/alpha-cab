@@ -15,12 +15,9 @@
     </head>
     <body>
         <h1>Welcome to Login Page</h1>
-               <%
-                   out.print("hello");
-            List<User> userList = (List<User>)request.getAttribute("userList");
-            for (User u : userList) {
-                out.println("username: " + u.getUsername() + "\tpassword: " + u.getPassword());
-            }
-            %> 
+        <%
+            out.print("hello<br>");
+            out.print(request.getAttribute("message"));
+            %>         
     </body>
 </html>

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Paul
  */
-public class UserServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,17 +42,27 @@ public class UserServlet extends HttpServlet {
         UserDao userDao = new UserDao();
         
         userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+
+        String username = request.getParameter("username-textbox");
         
-        List<User> userList = new ArrayList();
+        String password = request.getParameter("password-textbox");
+        
+        User u = new User(username, password);
+        
+        boolean userExists = false;
         
         try {
-            userList = userDao.getAllUsers();
-            
+            userExists = userDao.doesUserExist(u);
         } catch (SQLException ex) {
-            Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
-            
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("userList", userList);
+        
+        if(userExists) {
+            request.setAttribute("message", "user exists, you are logged in!");
+        } else {
+            request.setAttribute("message", "user does not exist!");
+        }
+        
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login.jsp");
         view.forward(request, response);
     }
