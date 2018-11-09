@@ -15,9 +15,12 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form method="get" action="UserServlet">
-            
-            <input name="button" type="submit" value="Click here for User Servlet"/>
+        <form method="post" action="Login">
+            Username:<br>
+            <input type="text" name="username-textbox"><br>
+            Password:<br>
+            <input type="password" name="password-textbox"><br><br>
+            <input name="button" type="submit" value="Login"/>
         </form>
     </body>
 </html>
