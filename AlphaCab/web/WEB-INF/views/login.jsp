@@ -23,8 +23,6 @@
                    oninvalid="this.setCustomValidity('No whitespace allowed')" oninput="this.setCustomValidity('')"><br><br>
             <input name="login-button" type="submit" value="Login"/>
         </form>
-        <form method="get" action="AddUser">
-            <input name="add-user-button" type="submit" value="Add User">
-        </form>
+
     </body>
 </html>

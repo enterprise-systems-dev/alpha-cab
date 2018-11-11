@@ -9,12 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home</title>
     </head>
     <body>
         <h1>WELCOME TO THE HOME PAGE!</h1>
-            <%
-            out.print(session.getAttribute("user"));
-            %>
+        Hello, <%out.print(session.getAttribute("user"));%><br><br>           
+        <form method="get" action="AddUser">
+            <input name="add-user-button" type="submit" value="Add User">
+        </form>
     </body>
 </html>
