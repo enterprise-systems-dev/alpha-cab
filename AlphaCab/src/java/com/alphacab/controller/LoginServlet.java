@@ -106,7 +106,9 @@ public class LoginServlet extends HttpServlet {
 //            view.forward(request, response);
             response.sendRedirect("index.jsp");
         } else {
-            request.setAttribute("message", "user does not exist!");
+            request.setAttribute("error", "Login Unsuccessful");
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login.jsp");
+            view.forward(request, response);
         }
         
 

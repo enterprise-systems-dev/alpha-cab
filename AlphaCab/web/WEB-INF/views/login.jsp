@@ -21,7 +21,12 @@
                    oninvalid="this.setCustomValidity('No whitespace allowed')" oninput="this.setCustomValidity('')"><br><br>
             <input type="password" name="password-textbox" placeholder="Password" required pattern="[^\s]+" 
                    oninvalid="this.setCustomValidity('No whitespace allowed')" oninput="this.setCustomValidity('')"><br><br>
-            <input name="login-button" type="submit" value="Login"/>
+            <input name="login-button" type="submit" value="Login"/><br><br>
+            <%
+                if(request.getAttribute("error") != null) {
+                    out.print(request.getAttribute("error"));
+                }
+            %>
         </form>
 
     </body>
