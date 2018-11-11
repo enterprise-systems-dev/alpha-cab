@@ -67,9 +67,9 @@ public class AddUserServlet extends HttpServlet {
         
         userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
         
-        // check that username does not exist
+        // TODO: check that username exists in db
         
-        // check that passwords match
+        // TODO: check that passwords match
 
         String username = request.getParameter("username-textbox");
         

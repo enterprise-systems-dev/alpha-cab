@@ -57,19 +57,21 @@ public class LoginFilter implements Filter {
         
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/Login";
-        String addUserURI = request.getContextPath() + "/AddUser";
 
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
         
+        // if user is already logged in and tries to go to login page, redirect to home page
         if(loggedIn && loginRequest) {
             response.sendRedirect("index.jsp");
+        // if user is logged in, allow access
         } else if (loggedIn || loginRequest) {
             // prevent user from going back to login page using browser 'Back' button
             response.setContentType("text/html;charset=UTF-8");
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setHeader("Expires", "0");
             chain.doFilter(request, response);
+        // user is not logged in, redirect to login page
         } else {
             response.sendRedirect(loginURI);
         }

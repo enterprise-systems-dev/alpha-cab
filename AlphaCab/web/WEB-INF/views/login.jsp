@@ -4,8 +4,6 @@
     Author     : Paul
 --%>
 
-<%@page import="java.util.List"%>
-<%@page import="com.alphacab.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <script src="resources/scripts/index.js"></script>
 <!DOCTYPE html>

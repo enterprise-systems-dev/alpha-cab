@@ -69,6 +69,7 @@ public class LoginServlet extends HttpServlet {
 
         String addUserButton = request.getParameter("add-user-button");
         
+        // if Add User button was clicked, redirect to AddUser page
         if(addUserButton != null) {
             String addUserURI = request.getContextPath() + "/AddUser";
             response.sendRedirect(addUserURI);          
@@ -93,8 +94,9 @@ public class LoginServlet extends HttpServlet {
         }
 
         if(userExists) {           
-            request.setAttribute("message", "user exists, you are logged in!");
             request.setAttribute("user", u);
+            
+            // create user session and cookie
             HttpSession session = request.getSession();
             session.setAttribute("user", u.getUsername());
             session.setMaxInactiveInterval(20 * 60);
@@ -102,10 +104,10 @@ public class LoginServlet extends HttpServlet {
             cookie.setMaxAge(20 * 60);
             response.addCookie(cookie);
             
-//            RequestDispatcher view = request.getRequestDispatcher("index.jsp");
-//            view.forward(request, response);
+            // after creating session, redirect to home page
             response.sendRedirect("index.jsp");
         } else {
+            // if user does not exist, forward error message back to login page
             request.setAttribute("error", "Login Unsuccessful");
             RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login.jsp");
             view.forward(request, response);
