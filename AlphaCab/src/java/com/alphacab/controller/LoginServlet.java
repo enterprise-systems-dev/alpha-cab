@@ -66,14 +66,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String addUserButton = request.getParameter("add-user-button");
-        
-        // if Add User button was clicked, redirect to AddUser page
-        if(addUserButton != null) {
-            String addUserURI = request.getContextPath() + "/AddUser";
-            response.sendRedirect(addUserURI);          
-        }
         
         UserDao userDao = new UserDao();
         
