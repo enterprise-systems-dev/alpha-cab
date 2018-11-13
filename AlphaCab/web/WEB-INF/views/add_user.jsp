@@ -12,6 +12,7 @@
         <title>Add User</title>
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
         <h1>Welcome to the Add User Page!</h1>
         <form method="post" action="AddUser">
             <input type="text" name="username-textbox" placeholder="Username" required pattern="[^\s]+" title="No whitespace"><br><br>

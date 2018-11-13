@@ -12,6 +12,7 @@
         <title>Home</title>
     </head>
     <body>
+        <jsp:include page="/WEB-INF/views/header.jsp"/>
         <h1>WELCOME TO THE HOME PAGE!</h1>
         Hello, <%out.print(session.getAttribute("user"));%><br><br>           
         <form method="get" action="AddUser">
