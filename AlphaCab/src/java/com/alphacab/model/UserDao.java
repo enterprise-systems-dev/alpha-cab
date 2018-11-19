@@ -34,13 +34,14 @@ public class UserDao {
         
         int rowsUpdated = 0;
         
-        String query = "INSERT INTO \"Users\" VALUES (?, ?)";
+        String query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
         
         try {
             
             PreparedStatement statement = this.connection.prepareStatement(query);
             statement.setString(1, user.getUsername().trim());
             statement.setString(2, user.getPassword().trim());
+            statement.setString(3, user.getRole());
             rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {
                 return true;
@@ -56,7 +57,7 @@ public class UserDao {
         
         ResultSet resultSet;
         
-        String query = "SELECT * FROM \"Users\" WHERE \"username\" = ? AND \"password\" = ?";
+        String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
         
         try {
             PreparedStatement statement = this.connection.prepareStatement(query);
@@ -65,6 +66,8 @@ public class UserDao {
             resultSet = statement.executeQuery();
             
             if(resultSet.next()) {
+                user.setId(resultSet.getInt(1));
+                user.setRole(resultSet.getString(4));
                 return true;
             }
         } catch (SQLException ex) {
@@ -83,7 +86,7 @@ public class UserDao {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM \"Users\"");
         
         while(resultSet.next()){
-            User u = new User(resultSet.getString(1), resultSet.getString(2));
+            User u = new User(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
             userList.add(u);
         }
         
