@@ -4,4 +4,5 @@
     Author     : Paul
 --%>
 
-<a href="Logout">Log out</a>
+        <a href="">Home</a> <a href="Customer">Customers</a> <a href="Drivers">Drivers</a> <a href="Logout">Log out</a>
+

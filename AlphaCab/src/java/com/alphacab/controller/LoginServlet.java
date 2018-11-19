@@ -39,7 +39,6 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -86,11 +85,9 @@ public class LoginServlet extends HttpServlet {
         }
 
         if(userExists) {           
-            request.setAttribute("user", u);
-            
             // create user session and cookie
             HttpSession session = request.getSession();
-            session.setAttribute("user", u.getUsername());
+            session.setAttribute("user", u);
             session.setMaxInactiveInterval(20 * 60);
             Cookie cookie = new Cookie("user", u.getUsername());
             cookie.setMaxAge(20 * 60);
@@ -116,6 +113,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

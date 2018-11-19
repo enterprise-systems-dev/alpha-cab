@@ -5,6 +5,8 @@
  */
 package com.alphacab.controller;
 
+import com.alphacab.model.Driver;
+import com.alphacab.model.DriverDao;
 import com.alphacab.model.User;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
@@ -46,8 +48,24 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
-           view.forward(request, response);           
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
+        view.forward(request, response);
+//        if(request.getParameter("add-user-button") == null) {
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
+//            view.forward(request, response);
+//        } else if(request.getParameter("role").equalsIgnoreCase("driver")){      
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/drivers/add_driver.jsp");
+//            view.forward(request, response);
+//        } else if(request.getParameter("role").equalsIgnoreCase("customer")) {
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/customers/add_customer.jsp");
+//            view.forward(request, response);
+//        } else if(request.getParameter("role").equalsIgnoreCase("admin")) {
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_admin.jsp");
+//            view.forward(request, response);
+//        } else {
+//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
+//            view.forward(request, response);
+//        }
     }
 
     /**
@@ -61,27 +79,62 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
-        UserDao userDao = new UserDao();
+        String selectedRole = request.getParameter("role");
         
-        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
-        
-        // TODO: check that username exists in db
-        
-        // TODO: check that passwords match
+        if(selectedRole.equalsIgnoreCase("admin")) {
+            UserDao userDao = new UserDao();
+            
+            userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+            
+            String username = request.getParameter("username-textbox");
 
-        String username = request.getParameter("username-textbox");
-        
-        String password = request.getParameter("password-textbox");
-    
-        User newUser = new User(username, password);
-        
-        if(userDao.saveUser(newUser)) {
+            String password = request.getParameter("password-textbox");
+            
+            String role = "admin";
+            
+            User user = new User(username, password, role);
+            
+            if(userDao.saveUser(user)) {
+                request.setAttribute("message", "admin user added");
+            } else {
+                request.setAttribute("error", "Error adding admin user");
+            }     
             RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
-            view.forward(request, response); 
+            view.forward(request, response);
+            
+        } else if(selectedRole.equalsIgnoreCase("customer")) {
+            // add customer
+            
+        } else if(selectedRole.equalsIgnoreCase("driver")) {
+            
+            // add driver
+            DriverDao driverDao = new DriverDao();
+        
+            driverDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+
+            String username = request.getParameter("username-textbox");
+
+            String password = request.getParameter("password-textbox");
+
+            String role = "driver";
+
+            String name = request.getParameter("driver-name-textbox");
+
+            String registration = request.getParameter("registration-textbox");
+
+            Driver driver = new Driver(username, password, role, name, registration);
+        
+            if(driverDao.saveDriver(driver)) {
+                request.setAttribute("message", "Driver added");
+            } else {
+                request.setAttribute("error", "Error adding driver");
+            }     
+            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
+            view.forward(request, response);
+            
         } else {
-            // error user has not been added
+            //error
         }
     }
 

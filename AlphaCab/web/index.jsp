@@ -4,6 +4,7 @@
     Author     : Paul
 --%>
 
+<%@page import="com.alphacab.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,9 +15,14 @@
     <body>
         <jsp:include page="/WEB-INF/views/header.jsp"/>
         <h1>WELCOME TO THE HOME PAGE!</h1>
-        Hello, <%out.print(session.getAttribute("user"));%><br><br>           
-        <form method="get" action="AddUser">
-            <input name="add-user-button" type="submit" value="Add User">
-        </form>
+        <%  User sessionUser = (User)session.getAttribute("user");
+            out.print(String.format("Hello %s, your user type is %s and id is %d", 
+                sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%><br><br>
+                
+                <%
+                    if (sessionUser.getRole().equalsIgnoreCase("admin")) {
+                %>
+                <a href="AddUser">Add User</a>
+                <%}%>
     </body>
 </html>
