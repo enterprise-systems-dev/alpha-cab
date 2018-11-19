@@ -58,7 +58,7 @@ CREATE TABLE Demands (
   PRIMARY KEY (id)
 );
 
-Alter table Demands add foreign key (userid) references Users;
+Alter table Demands add foreign key (customerid) references Users;
 
 INSERT INTO Demands (Name, Address, Destination, Date, Time, Status, userid) VALUES
 ('Eva Smith', 'Finchley, London', 'King''s Cross, London', '2015-11-02', '09:22:18', 'Outstanding', 4);
