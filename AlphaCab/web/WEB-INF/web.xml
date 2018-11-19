@@ -36,6 +36,14 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>com.alphacab.controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.CustomersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetDriversServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.DriversServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -50,6 +58,14 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/Customers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetDriversServlet</servlet-name>
+        <url-pattern>/Drivers</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
