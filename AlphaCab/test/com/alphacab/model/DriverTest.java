@@ -14,15 +14,30 @@ import static org.junit.Assert.*;
  */
 public class DriverTest {
     
+    static Driver driverInstance;
+    
     public DriverTest() {
+        
     }
     
     @BeforeClass
     public static void setUpClass() {
+        driverInstance = new Driver("user", "pass", "role", "name", "reg");
     }
     
     @AfterClass
     public static void tearDownClass() {
+    }
+    
+    @Test
+    public void testAddJob() {
+        System.out.print("addJob");
+        Job j = new Job();
+        driverInstance.addJob(j);
+        Job expectedJob = driverInstance.getCurrentJob();
+        Job result = driverInstance.removeJob();
+        assertEquals(expectedJob, result);
+        System.out.print(" - OK\n");
     }
 
     /**
@@ -31,9 +46,9 @@ public class DriverTest {
     @Test
     public void testGetName() {
         System.out.print("getName");
-        Driver instance = new Driver("user", "pass", "role", "name", "reg");
+        
         String expResult = "name";
-        String result = instance.getName();
+        String result = driverInstance.getName();
         assertEquals(expResult, result);
         System.out.print(" - OK\n");
         // TODO review the generated test code and remove the default call to fail.
@@ -72,12 +87,14 @@ public class DriverTest {
      */
     @Test
     public void testSetName() {
-        System.out.println("setName");
+        System.out.print("setName");
         String name = "";
-        Driver instance = new Driver();
-        instance.setName(name);
+        driverInstance.setName(name);
+        String result = driverInstance.getName();
+        assertEquals(name, result);
+        System.out.print(" - OK\n");
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//        fail("The test case is a prototype.");
     }
 
     /**

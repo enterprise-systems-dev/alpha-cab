@@ -5,6 +5,8 @@
  */
 package com.alphacab.model;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author Paul
@@ -19,6 +21,8 @@ public class Driver extends User {
     
     private int userId;
     
+    private LinkedList jobQueue;
+    
     public Driver() {
     }
 
@@ -26,6 +30,7 @@ public class Driver extends User {
         super(username, password, role);
         this.name = name;
         this.registration = registration;
+        jobQueue = new LinkedList();
     }
 
 
@@ -62,5 +67,16 @@ public class Driver extends User {
         this.userId = userId;
     }
     
+    public void addJob(Job j) {
+        jobQueue.addLast(j);
+    }
+    
+    public Job removeJob() {
+        return (Job) jobQueue.removeFirst();
+    }
+    
+    public Job getCurrentJob() {
+        return (Job) jobQueue.getFirst();
+    }
     
 }
