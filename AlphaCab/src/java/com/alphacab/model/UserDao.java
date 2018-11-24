@@ -17,57 +17,88 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Paul
+ * @author Paul, Trym
  */
 public class UserDao {
 
-    private Connection connection;
+    private Connection connection;  //???
 
     public UserDao() {
     }
     
+    //???
     public void connect(Connection conn) {
         this.connection = conn;
     }
     
     public boolean saveUser(User user) {
-        
-        int rowsUpdated = 0;
-        
-        String query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
-        
-        try {
-            
-            PreparedStatement statement = this.connection.prepareStatement(query);
-            statement.setString(1, user.getUsername().trim());
-            statement.setString(2, user.getPassword().trim());
-            statement.setString(3, user.getRole());
-            rowsUpdated = statement.executeUpdate();
-            if (rowsUpdated > 0) {
-                return true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return false;
+//        
+//        int rowsUpdated;
+//        
+//        String query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
+//        
+//        try {
+//            PreparedStatement statement = this.connection.prepareStatement(query);
+//            statement.setString(1, user.getUsername().trim());
+//            statement.setString(2, user.getPassword().trim());
+//            statement.setString(3, user.getRole());
+//            
+//            rowsUpdated = statement.executeUpdate();
+//            
+//            ResultSet userId = statement.getGeneratedKeys();
+//            
+//            /*
+//            * savedToClassTable gets its value from the abstract method 
+//            * save() which is implemented by each
+//            * subclass, callable from a User object, that saves the user
+//            * to the relevant subclass data table, i.e.
+//            * User user = new Admin(etc..);
+//            * user.save() then returns true if the query to add to
+//            * admin table is successful
+//            */
+//            
+//            boolean savedToClassTable = false;
+//            
+//            if(userId.next()) {
+//                user.setId(userId.getInt(1));
+//                savedToClassTable = user.save(this.connection);
+//            }
+//            if (rowsUpdated > 0 && savedToClassTable) {
+//                return true;
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return false;
+        return true;
     }
     
-    public boolean doesUserExist(User user) throws SQLException {
-        
+    public boolean deleteUser(User user) {
+        return true;
+    }
+    
+    public boolean editUser(User user) {
+        return true;
+    }
+    
+    //???
+    public boolean doesUserExist(String uname, String pword, Connection c) throws SQLException {
+        /*
+        * NEEDS TO BE UPDATED TO ACCOMPANY THE CHANGES TO CLASSES, maybe not?
+        */
         ResultSet resultSet;
         
         String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
         
         try {
-            PreparedStatement statement = this.connection.prepareStatement(query);
-            statement.setString(1, user.getUsername());
-            statement.setString(2, user.getPassword());
+//            PreparedStatement statement = this.connection.prepareStatement(query);
+            PreparedStatement statement = c.prepareStatement(query);
+            statement.setString(1, uname);
+            statement.setString(2, pword);
             resultSet = statement.executeQuery();
             
             if(resultSet.next()) {
-                user.setId(resultSet.getInt(1));
-                user.setRole(resultSet.getString(4));
+//                user.setId(resultSet.getInt(1));
                 return true;
             }
         } catch (SQLException ex) {
@@ -77,16 +108,90 @@ public class UserDao {
         return false;
     }
     
+    public List<User> getAllDrivers() throws SQLException {
+        
+        List<User> userList = new ArrayList();
+        
+        Statement statement = this.connection.createStatement();
+        
+        ResultSet resultSet = statement.executeQuery(
+                "SELECT * FROM users WHERE role = driver");
+        
+        User u;
+        
+        while(resultSet.next()){
+                
+                u = new Driver(resultSet.getInt("ID"),
+                        resultSet.getString("USERNAME"),
+                        resultSet.getString("PASSWORD"),
+                        resultSet.getString("ROLE"));
+                
+            userList.add(u);
+        }
+        
+        return userList;
+    }
+    
+    public List<User> getAllCustomers() throws SQLException {
+        
+        List<User> userList = new ArrayList();
+        
+        Statement statement = this.connection.createStatement();
+        
+        ResultSet resultSet = statement.executeQuery(
+                "SELECT * FROM users WHERE role = customer");
+        
+        User u;
+        
+        while(resultSet.next()){
+                
+                u = new Customer(resultSet.getInt("ID"),
+                        resultSet.getString("USERNAME"),
+                        resultSet.getString("PASSWORD"),
+                        resultSet.getString("ROLE"));
+                
+            userList.add(u);
+        }
+        
+        return userList;
+    }
+
     public List<User> getAllUsers() throws SQLException {
         
         List<User> userList = new ArrayList();
         
         Statement statement = this.connection.createStatement();
         
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM \"Users\"");
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
+        
+        User u = null;
+        
+        int newId;
+        String newUname;
+        String newPword;
+        String newRole;
         
         while(resultSet.next()){
-            User u = new User(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+            
+                newId = resultSet.getInt("ID");
+                newUname = resultSet.getString("USERNAME");
+                newPword = resultSet.getString("PASSWORD");
+                newRole = resultSet.getString("ROLE");
+                
+                switch(newRole) {
+                case "admin":
+                    u = new Admin(newId, newUname, newPword, newRole);
+                    break;
+                case "customer":
+                    u = new Customer(newId, newUname, newPword, newRole);
+                    break;
+                case "driver":
+                    u = new Driver(newId, newUname, newPword, newRole);
+                    break;
+                default:
+                    //Error!!!
+                }
+                
             userList.add(u);
         }
         

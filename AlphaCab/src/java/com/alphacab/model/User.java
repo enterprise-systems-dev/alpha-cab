@@ -4,18 +4,19 @@
  * and open the template in the editor.
  */
 package com.alphacab.model;
+//import java.sql.Connection;
 
 /**
  *
  * @author Paul
  */
-public class User {
+public abstract class User {
     
     private int id;
     private String username;
     private String password;
     private String role;
-
+    
     public User() {
         
     }
@@ -25,7 +26,8 @@ public class User {
         this.password = password;
     }
     
-    public User(String username, String password, String role) {
+    public User(int id, String username, String password, String role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.role = role;
@@ -58,9 +60,6 @@ public class User {
     public String getRole() {
         return role;
     }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+//    public abstract boolean save(Connection connection);
     
 }
