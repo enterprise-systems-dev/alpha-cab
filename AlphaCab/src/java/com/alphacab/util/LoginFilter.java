@@ -65,7 +65,7 @@ public class LoginFilter implements Filter {
         if(loggedIn && loginRequest) {
             response.sendRedirect("index.jsp");
         // if user is logged in, allow access
-        } else if (loggedIn || loginRequest) {
+        } else if (loggedIn || loginRequest) {  //NOT WORKING!!!
             // prevent user from going back to login page using browser 'Back' button
             response.setContentType("text/html;charset=UTF-8");
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");

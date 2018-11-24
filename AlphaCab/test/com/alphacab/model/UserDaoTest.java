@@ -62,12 +62,12 @@ public class UserDaoTest {
      */
     @Test
     public void testDoesUserExist() throws Exception {
-        System.out.println("doesUserExist");
-        User user = null;
-        UserDao instance = new UserDao();
-        boolean expResult = false;
-        boolean result = instance.doesUserExist(user);
-        assertEquals(expResult, result);
+//        System.out.println("doesUserExist");
+//        User user = null;
+//        UserDao instance = new UserDao();
+//        boolean expResult = false;
+//        boolean result = instance.doesUserExist(user);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

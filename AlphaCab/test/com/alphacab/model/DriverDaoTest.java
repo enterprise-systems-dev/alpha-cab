@@ -47,12 +47,12 @@ public class DriverDaoTest {
      */
     @Test
     public void testSaveDriver() {
-        System.out.println("saveDriver");
-        Driver driver = null;
-        DriverDao instance = new DriverDao();
-        boolean expResult = false;
-        boolean result = instance.saveDriver(driver);
-        assertEquals(expResult, result);
+//        System.out.println("saveDriver");
+//        Driver driver = null;
+//        DriverDao instance = new DriverDao();
+//        boolean expResult = false;
+//        boolean result = instance.saveDriver(driver);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -62,12 +62,12 @@ public class DriverDaoTest {
      */
     @Test
     public void testDeleteDriver() {
-        System.out.println("deleteDriver");
-        int id = 0;
-        DriverDao instance = new DriverDao();
-        boolean expResult = false;
-        boolean result = instance.deleteDriver(id);
-        assertEquals(expResult, result);
+//        System.out.println("deleteDriver");
+//        int id = 0;
+//        DriverDao instance = new DriverDao();
+//        boolean expResult = false;
+//        boolean result = instance.deleteDriver(id);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -77,11 +77,11 @@ public class DriverDaoTest {
      */
     @Test
     public void testGetAllDrivers() throws Exception {
-        System.out.println("getAllDrivers");
-        DriverDao instance = new DriverDao();
-        List<Driver> expResult = null;
-        List<Driver> result = instance.getAllDrivers();
-        assertEquals(expResult, result);
+//        System.out.println("getAllDrivers");
+//        DriverDao instance = new DriverDao();
+//        List<Driver> expResult = null;
+//        List<Driver> result = instance.getAllDrivers();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
