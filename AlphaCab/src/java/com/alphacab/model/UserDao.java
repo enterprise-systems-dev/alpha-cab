@@ -21,12 +21,11 @@ import java.util.logging.Logger;
  */
 public class UserDao {
 
-    private Connection connection;  //???
+    private Connection connection;
 
     public UserDao() {
     }
     
-    //???
     public void connect(Connection conn) {
         this.connection = conn;
     }
@@ -111,11 +110,14 @@ public class UserDao {
     public List<User> getAllDrivers() throws SQLException {
         
         List<User> userList = new ArrayList();
+               
+        String query = "SELECT * FROM users WHERE role = ?";
         
-        Statement statement = this.connection.createStatement();
+        PreparedStatement statement = this.connection.prepareStatement(query);
         
-        ResultSet resultSet = statement.executeQuery(
-                "SELECT * FROM users WHERE role = driver");
+        statement.setString(1, "driver");
+                
+        ResultSet resultSet = statement.executeQuery();
         
         User u;
         
@@ -136,10 +138,13 @@ public class UserDao {
         
         List<User> userList = new ArrayList();
         
-        Statement statement = this.connection.createStatement();
+        String query = "SELECT * FROM users WHERE role = ?";
         
-        ResultSet resultSet = statement.executeQuery(
-                "SELECT * FROM users WHERE role = customer");
+        PreparedStatement statement = this.connection.prepareStatement(query);
+        
+        statement.setString(1, "customer");
+        
+        ResultSet resultSet = statement.executeQuery();
         
         User u;
         
@@ -160,9 +165,11 @@ public class UserDao {
         
         List<User> userList = new ArrayList();
         
-        Statement statement = this.connection.createStatement();
+        String query = "SELECT * FROM users";  //???
         
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM users");
+        PreparedStatement statement = this.connection.prepareStatement(query);
+        
+        ResultSet resultSet = statement.executeQuery();
         
         User u = null;
         

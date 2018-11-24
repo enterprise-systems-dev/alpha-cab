@@ -8,10 +8,12 @@ package com.alphacab.controller;
 
 //import com.alphacab.model.DriverDao;
 import com.alphacab.model.DriverDao;
+import com.alphacab.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -55,7 +57,8 @@ public class DriversServlet extends HttpServlet {
         driverDao.connect((Connection)request.getServletContext().getAttribute("connection"));
         
         try {
-            request.setAttribute("driverList", driverDao.getAllDrivers());
+            List<User> ulist = driverDao.getAllDrivers();
+            request.setAttribute("driverList", ulist);
         } catch (SQLException ex) {
             Logger.getLogger(DriversServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -74,6 +77,9 @@ public class DriversServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        System.out.println("delete test");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/drivers.jsp");
+        view.forward(request, response);
     }
 
     /** 

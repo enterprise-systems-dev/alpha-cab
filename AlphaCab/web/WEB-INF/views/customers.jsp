@@ -18,22 +18,22 @@
         <h1>Welcome to Customers page</h1>
         Customer List<br>
         <form method="post">
-        <table style="width:50%">
+        <table style="width:25%">
             <tr>
               <th>ID</th>
               <th>Name</th>
               <th>Registration</th>
             </tr>
-            <%--        <%
-            ArrayList<Driver> driverList = (ArrayList)request.getAttribute("driverList");
-            for(Driver driver : driverList) {
+        <%
+            ArrayList<Customer> customerList = (ArrayList)request.getAttribute("customerList");
+            for(Customer customer : customerList) {
                 out.print("<tr>");
-                out.print("<td>" + driver.getId() + "</td>");
-                out.print("<td>" + driver.getUsername()+ "</td>");  //getName
-                out.print("<td>" + driver.getPassword()+ "</td>");  //getRegistration
+                out.print("<td>" + customer.getId() + "</td>");
+                out.print("<td>" + customer.getUsername()+ "</td>");  //getName
+                out.print("<td>" + customer.getPassword()+ "</td>");  //getRegistration
                 out.print("</tr>");
             }
-        %> --%>
+        %>
         </form>
     </body>
 </html>

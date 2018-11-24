@@ -55,7 +55,7 @@ public class CustomersServlet extends HttpServlet {
         customerDao.connect((Connection)request.getServletContext().getAttribute("connection"));
         
         try {
-            request.setAttribute("customerList", customerDao.getAllDrivers());
+            request.setAttribute("customerList", customerDao.getAllCustomers());
         } catch (SQLException ex) {
             Logger.getLogger(DriversServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

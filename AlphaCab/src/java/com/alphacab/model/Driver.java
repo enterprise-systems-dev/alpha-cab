@@ -5,13 +5,9 @@
  */
 package com.alphacab.model;
 
-//<<<<<<< HEAD
-//import java.util.LinkedList;
-//=======
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-//>>>>>>> Trym-branch
 
 /**
  *
@@ -29,37 +25,10 @@ public class Driver extends User {
 //    
 //    private int userId;
     
-//<<<<<<< HEAD
-//    private int userId;
-//    
-//    private LinkedList jobQueue;
-//    
-//    public Driver() {
-//    }
-//
-//    public Driver(String username, String password, String role, String name, String registration) {
-//        super(username, password, role);
-//        this.name = name;
-//        this.registration = registration;
-//        jobQueue = new LinkedList();
-//    }
-//
-//
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//=======
+
     public Driver(int id, String username, String password, String role) {
         super(id, username, password, role);
-//>>>>>>> Trym-branch
+
     }
     
 //    public Driver(int id, String username, String password, String name, String registration) {
