@@ -6,7 +6,6 @@
 package com.alphacab.controller;
 
 import com.alphacab.model.CustomerDao;
-import com.alphacab.model.DriverDao;
 import com.alphacab.model.User;
 import java.io.IOException;
 import java.sql.Connection;

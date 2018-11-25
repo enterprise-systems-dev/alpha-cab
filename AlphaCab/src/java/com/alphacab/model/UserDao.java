@@ -104,7 +104,7 @@ public abstract class UserDao {
         String pword = "";
         String role = "";
 
-        User user = null;
+        User user;
 
         String query = "SELECT * FROM Users WHERE id = ?";
 
@@ -194,7 +194,7 @@ public abstract class UserDao {
 
         List<User> userList = new ArrayList();
 
-        String query = "SELECT * FROM users";  //???
+        String query = "SELECT * FROM users";
 
         PreparedStatement statement = this.connection.prepareStatement(query);
 

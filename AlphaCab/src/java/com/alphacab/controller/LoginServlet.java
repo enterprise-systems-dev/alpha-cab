@@ -6,9 +6,7 @@
 package com.alphacab.controller;
 
 import com.alphacab.model.Admin;
-//import com.alphacab.model.AdminDao;
 import com.alphacab.model.Customer;
-//import com.alphacab.model.CustomerDao;
 import com.alphacab.model.Driver;
 import com.alphacab.model.User;
 import com.alphacab.model.UserDao;
@@ -86,11 +84,7 @@ public class LoginServlet extends HttpServlet {
         
         String query = "SELECT * FROM Users WHERE username = ? AND password = ?";
         
-//        boolean userExists = false;
-        
-        User newUser = null;  //???
-        
-//        Admin u = new Admin();
+        User newUser = null;
 
         int newId;
         String newUname;
@@ -102,7 +96,7 @@ public class LoginServlet extends HttpServlet {
             PreparedStatement statement = c.prepareStatement(query);
             statement.setString(1, username);
             statement.setString(2, password);
-            resultSet = statement.executeQuery();  //???
+            resultSet = statement.executeQuery();
             
             //Create new user with proper role
             if(resultSet.next()) {
@@ -150,43 +144,6 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-//            while(resultSet.next()){  // Debugging only!!!
-//                String a1 = resultSet.getString(1);
-//                String a2 = resultSet.getString(2);
-//                String a3 = resultSet.getString(3);
-//                String a4 = resultSet.getString("Role");
-//                System.out.println(a1 + "   " + a2 + "   " + a3 + "   " + a4);
-//            }
-            
-//            if(resultSet.next()) {
-//                userExists = true;
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
-//        if(userExists) {  
-//            
-//            
-//            // create user session and cookie
-//            HttpSession session = request.getSession();
-//            session.setAttribute("user", u);
-//            session.setMaxInactiveInterval(20 * 60);
-//            Cookie cookie = new Cookie("user", u.getUsername());
-//            cookie.setMaxAge(20 * 60);
-//            response.addCookie(cookie);
-//            
-//            // after creating session, redirect to home page
-//            response.sendRedirect("index.jsp");
-//        } else {
-//            // if user does not exist, forward error message back to login page
-//            request.setAttribute("error", "Login Unsuccessful");
-//            RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/login.jsp");
-//            view.forward(request, response);
-//        }
-        
-
     }
 
     /**

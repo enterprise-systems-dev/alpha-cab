@@ -11,8 +11,6 @@ import com.alphacab.model.Customer;
 import com.alphacab.model.CustomerDao;
 import com.alphacab.model.Driver;
 import com.alphacab.model.DriverDao;
-import com.alphacab.model.User;
-import com.alphacab.model.UserDao;
 import java.io.IOException;
 import java.sql.Connection;
 import javax.servlet.RequestDispatcher;

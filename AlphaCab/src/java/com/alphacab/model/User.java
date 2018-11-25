@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.alphacab.model;
-//import java.sql.Connection;
 
 /**
  *
@@ -61,6 +60,5 @@ public abstract class User {
     public String getRole() {
         return role;
     }
-//    public abstract boolean save(Connection connection);
     
 }
