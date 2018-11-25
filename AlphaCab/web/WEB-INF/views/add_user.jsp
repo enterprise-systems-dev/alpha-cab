@@ -55,7 +55,7 @@
     <body>
         <jsp:include page="header.jsp"/>
         <h1>Welcome to the Add User Page!</h1>
-        <form method="post" action="AddUser">
+        <form method="post" action="add_user">
         Select User Role: 
         <select name="role" onchange=displayRoleInputs(this.value);>
             <option value="admin">Admin</option>

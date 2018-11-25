@@ -23,7 +23,26 @@ public class DriverDao extends UserDao {
 
     @Override
     public boolean saveSpecific(User user) {
-        return true;
+        
+        String driverQuery = "INSERT INTO Drivers (registration, name, userid) VALUES (?, ?, ?)";
+        
+        Driver driver = (Driver) user;
+        
+        int rowsUpdated = 0;
+        
+        try {
+            PreparedStatement customersStatement = getConnection().prepareStatement(driverQuery);
+            customersStatement.setString(1, driver.getRegistration());
+            customersStatement.setString(2, driver.getName());
+            customersStatement.setInt(3, driver.getId());
+            
+            rowsUpdated = customersStatement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rowsUpdated > 0;
     }
 
 //    private Connection connection;

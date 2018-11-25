@@ -18,7 +18,7 @@
         <h1>Welcome to the Drivers page</h1>
         <form method="post" name="delete-user-form" action="Drivers">
             <input type="text" name="selected-driver"> 
-            <input type="submit" name="delete-driver" value="Delete driver">
+            <input type="submit" name="delete-driver" value="Driver">
         </form>
         Driver List<br>
         <form method="post">

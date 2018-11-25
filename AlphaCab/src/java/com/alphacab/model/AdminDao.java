@@ -23,7 +23,7 @@ public class AdminDao extends UserDao {
     
     @Override
     public boolean saveSpecific(User user) {
-        return true;
+        return true;  //There is no admin table
     }
 //
 //    private Connection connection;

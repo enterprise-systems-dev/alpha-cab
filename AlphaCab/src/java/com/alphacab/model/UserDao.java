@@ -40,10 +40,12 @@ public abstract class UserDao {
         
         boolean savedToClassTable = false;
         
-        String query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
+        String query = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
         
         try {
-            PreparedStatement statement = this.connection.prepareStatement(query);
+            PreparedStatement statement = this.connection.prepareStatement(
+                    query, PreparedStatement.RETURN_GENERATED_KEYS);
+            
             statement.setString(1, user.getUsername().trim());
             statement.setString(2, user.getPassword().trim());
             statement.setString(3, user.getRole());

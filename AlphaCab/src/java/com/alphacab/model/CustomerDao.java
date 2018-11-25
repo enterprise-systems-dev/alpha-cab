@@ -24,7 +24,7 @@ public class CustomerDao extends UserDao {
     @Override
     public /*<T extends User>*/ boolean saveSpecific(User user) {
         
-        String customersQuery = "INSERT INTO Customers (address, name, userid) VALUES (?, ?, ?)";
+        String customersQuery = "INSERT INTO Customer (address, name, userid) VALUES (?, ?, ?)";
         
         Customer customer = (Customer) user;
         
