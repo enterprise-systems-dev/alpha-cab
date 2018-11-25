@@ -9,9 +9,12 @@ package com.alphacab.controller;
 //import com.alphacab.model.DriverDao;
 import com.alphacab.model.DriverDao;
 import com.alphacab.model.User;
+import com.alphacab.model.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -54,7 +57,7 @@ public class DriversServlet extends HttpServlet {
         
         DriverDao driverDao = new DriverDao();
         
-        driverDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        driverDao.setConnection((Connection)request.getServletContext().getAttribute("connection"));
         
         try {
             List<User> ulist = driverDao.getAllDrivers();
@@ -77,7 +80,33 @@ public class DriversServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        System.out.println("delete test");
+        
+        UserDao driverDao = new DriverDao();
+        
+        driverDao.setConnection(((Connection)request.getServletContext().getAttribute("connection")));
+        
+        String driverID = request.getParameter("delete-user-form");
+        
+        String query = "DELETE FROM users WHERE ID = ?";
+        
+        boolean rowCount;
+                
+        try{
+            
+            PreparedStatement statement = driverDao.getConnection().prepareStatement(query);
+
+            statement.setString(1, driverID);
+            
+            rowCount = statement.execute();  //This doesnt do anything!!!
+            
+            // Find better way of updating the table
+            List<User> ulist = driverDao.getAllDrivers();
+            request.setAttribute("driverList", ulist);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DriversServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/drivers.jsp");
         view.forward(request, response);
     }

@@ -22,7 +22,7 @@
                 <%
                     if (sessionUser.getRole().equalsIgnoreCase("admin")) {
                  %>
-                <a href="AddUser">Add User</a>
+                <a href="add_user">Add User</a>
                 <%}%>
     </body>
 </html>

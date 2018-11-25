@@ -17,18 +17,22 @@ public class Driver extends User {
     
 //    private int id;
 //    
-//    private String name;
+    private String name;
 //    
 //    private static String ROLE = "Driver";
 //    
-//    private String registration;
+    private String registration;
 //    
 //    private int userId;
     
+    public Driver(String username, String password, String role, String dName, String registration) {
+        super(username, password, role);
+        name = dName;
+        this.registration = registration;
+    }
 
     public Driver(int id, String username, String password, String role) {
         super(id, username, password, role);
-
     }
     
 //    public Driver(int id, String username, String password, String name, String registration) {
@@ -113,5 +117,21 @@ public class Driver extends User {
 //    public Job getCurrentJob() {
 //        return (Job) jobQueue.getFirst();
 //    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRegistration() {
+        return registration;
+    }
+
+    public void setRegistration(String registration) {
+        this.registration = registration;
+    }
     
 }

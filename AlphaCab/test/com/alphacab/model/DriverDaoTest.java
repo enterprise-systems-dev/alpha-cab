@@ -34,10 +34,10 @@ public class DriverDaoTest {
      */
     @Test
     public void testConnect() {
-        System.out.println("connect");
-        Connection conn = null;
-        DriverDao instance = new DriverDao();
-        instance.connect(conn);
+//        System.out.println("connect");
+//        Connection conn = null;
+//        DriverDao instance = new DriverDao();
+//        instance.connect(conn);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

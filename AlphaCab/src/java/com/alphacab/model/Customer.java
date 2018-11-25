@@ -13,16 +13,25 @@ public class Customer extends User {
     
 //    private int id;
 //    
-//    private String name;
+    private String name;
 //    
-//    private String address;
+    private String address;
 //    private static String ROLE = "Customer";
 //    
 //    private int userId;
-//    
+//   
+    
+    public Customer(String username, String password, String role, String cName, String address) {
+        super(username, password, role);
+        name = cName;
+        this.address = address;
+    }
+    
     public Customer(int id, String username, String password, String role) {
         super(id, username, password, role);
     }
+    
+    
     
 //    public Customer(int id, String username, String password, String name, String address) {
 //        super(id, username, password);
@@ -79,5 +88,21 @@ public class Customer extends User {
 //        this.userId = userId;
 //    }
 //    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     
 }

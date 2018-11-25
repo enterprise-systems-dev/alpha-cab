@@ -34,10 +34,10 @@ public class UserDaoTest {
      */
     @Test
     public void testConnect() {
-        System.out.println("connect");
-        Connection conn = null;
-        UserDao instance = new UserDao();
-        instance.connect(conn);
+//        System.out.println("connect");
+//        Connection conn = null;
+//        UserDao instance = new UserDao();
+//        instance.connect(conn);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -47,12 +47,12 @@ public class UserDaoTest {
      */
     @Test
     public void testSaveUser() {
-        System.out.println("saveUser");
-        User user = null;
-        UserDao instance = new UserDao();
-        boolean expResult = false;
-        boolean result = instance.saveUser(user);
-        assertEquals(expResult, result);
+//        System.out.println("saveUser");
+//        User user = null;
+//        UserDao instance = new UserDao();
+//        boolean expResult = false;
+//        boolean result = instance.saveUser(user);
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -77,11 +77,11 @@ public class UserDaoTest {
      */
     @Test
     public void testGetAllUsers() throws Exception {
-        System.out.println("getAllUsers");
-        UserDao instance = new UserDao();
-        List<User> expResult = null;
-        List<User> result = instance.getAllUsers();
-        assertEquals(expResult, result);
+//        System.out.println("getAllUsers");
+//        UserDao instance = new UserDao();
+//        List<User> expResult = null;
+//        List<User> result = instance.getAllUsers();
+//        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

@@ -82,6 +82,6 @@
                 if(request.getAttribute("message") != null) {
                     out.print(request.getAttribute("message"));
                 }
-            %>
+            %> 
     </body>
 </html>

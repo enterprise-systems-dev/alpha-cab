@@ -1,25 +1,30 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package com.alphacab.model;
-//
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.sql.Statement;
-//import java.util.ArrayList;
-//import java.util.List;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//
-///**
-// *
-// * @author Paul, Trym
-// */
-//public class AdminDao extends UserDao {
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.alphacab.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ *
+ * @author Paul, Trym
+ */
+public class AdminDao extends UserDao {
+    
+    @Override
+    public boolean saveSpecific(User user) {
+        return true;
+    }
 //
 //    private Connection connection;
 //
@@ -107,4 +112,4 @@
 //    
 //
 //    
-//}
+}

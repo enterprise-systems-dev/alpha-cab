@@ -19,58 +19,52 @@ import java.util.logging.Logger;
  *
  * @author Paul, Trym
  */
-public class UserDao {
+public abstract class UserDao {
 
     private Connection connection;
 
     public UserDao() {
     }
     
-    public void connect(Connection conn) {
+    public void setConnection(Connection conn) {
         this.connection = conn;
     }
     
-    public boolean saveUser(User user) {
-//        
-//        int rowsUpdated;
-//        
-//        String query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
-//        
-//        try {
-//            PreparedStatement statement = this.connection.prepareStatement(query);
-//            statement.setString(1, user.getUsername().trim());
-//            statement.setString(2, user.getPassword().trim());
-//            statement.setString(3, user.getRole());
-//            
-//            rowsUpdated = statement.executeUpdate();
-//            
-//            ResultSet userId = statement.getGeneratedKeys();
-//            
-//            /*
-//            * savedToClassTable gets its value from the abstract method 
-//            * save() which is implemented by each
-//            * subclass, callable from a User object, that saves the user
-//            * to the relevant subclass data table, i.e.
-//            * User user = new Admin(etc..);
-//            * user.save() then returns true if the query to add to
-//            * admin table is successful
-//            */
-//            
-//            boolean savedToClassTable = false;
-//            
-//            if(userId.next()) {
-//                user.setId(userId.getInt(1));
-//                savedToClassTable = user.save(this.connection);
-//            }
-//            if (rowsUpdated > 0 && savedToClassTable) {
-//                return true;
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return false;
-        return true;
+    public Connection getConnection() {
+        return connection;
     }
+    
+    public <T extends User> boolean saveUser(T user) {  //is generic method necessary ???
+        
+        int rowsUpdated = 0;
+        
+        boolean savedToClassTable = false;
+        
+        String query = "INSERT INTO Users (username, password, role) VALUES (?, ?, ?)";
+        
+        try {
+            PreparedStatement statement = this.connection.prepareStatement(query);
+            statement.setString(1, user.getUsername().trim());
+            statement.setString(2, user.getPassword().trim());
+            statement.setString(3, user.getRole());
+                        
+            rowsUpdated = statement.executeUpdate();
+            
+            ResultSet userId = statement.getGeneratedKeys();
+            
+            if(userId.next()) {
+                user.setId(userId.getInt(1));
+                savedToClassTable = saveSpecific(user);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return (rowsUpdated > 0 && savedToClassTable);
+    }
+    
+    public abstract /*<T extends User>*/ boolean saveSpecific(User user);  //is generic method necessary ???   
     
     public boolean deleteUser(User user) {
         return true;

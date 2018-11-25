@@ -52,7 +52,7 @@ public class CustomersServlet extends HttpServlet {
         
         CustomerDao customerDao = new CustomerDao();
         
-        customerDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        customerDao.setConnection(((Connection)request.getServletContext().getAttribute("connection")));
         
         try {
             request.setAttribute("customerList", customerDao.getAllCustomers());

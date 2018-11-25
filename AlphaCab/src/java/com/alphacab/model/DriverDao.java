@@ -19,13 +19,14 @@ import java.util.logging.Logger;
  *
  * @author Paul, Trym
  */
-public class DriverDao extends UserDao{
+public class DriverDao extends UserDao {
+
+    @Override
+    public boolean saveSpecific(User user) {
+        return true;
+    }
 
 //    private Connection connection;
-
-    public DriverDao() {
-    }
-    
 //    public void connect(Connection conn) {
 //        this.connection = conn;
 //    }

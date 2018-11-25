@@ -20,6 +20,30 @@ import java.util.logging.Logger;
  * @author Paul, Trym
  */
 public class CustomerDao extends UserDao {
+
+    @Override
+    public /*<T extends User>*/ boolean saveSpecific(User user) {
+        
+        String customersQuery = "INSERT INTO Customers (address, name, userid) VALUES (?, ?, ?)";
+        
+        Customer customer = (Customer) user;
+        
+        int rowsUpdated = 0;
+        
+        try {
+            PreparedStatement customersStatement = getConnection().prepareStatement(customersQuery);
+            customersStatement.setString(1, customer.getAddress());
+            customersStatement.setString(2, customer.getName());
+            customersStatement.setInt(3, customer.getId());
+            
+            rowsUpdated = customersStatement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rowsUpdated > 0;
+    }
 //
 //    private Connection connection;
 //
