@@ -16,6 +16,10 @@
     <body>
         <jsp:include page="header.jsp"/>
         <h1>Welcome to Customers page</h1>
+        <form method="post" name="delete-customer-form" action="DeleteCustomer">
+            <input type="text" name="selected-customer" placeholder="Customer`s ID"> 
+            <input type="submit" name="delete-customer" value="Delete customer">
+        </form>
         Customer List<br>
         <form method="post">
         <table style="width:25%">
@@ -30,7 +34,7 @@
                 out.print("<tr>");
                 out.print("<td>" + customer.getId() + "</td>");
                 out.print("<td>" + customer.getUsername()+ "</td>");  //getName
-                out.print("<td>" + customer.getPassword()+ "</td>");  //getRegistration
+                out.print("<td>" + customer.getPassword()+ "</td>");  //getAddress
                 out.print("</tr>");
             }
         %>

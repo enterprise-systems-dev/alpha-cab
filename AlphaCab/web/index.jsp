@@ -24,5 +24,11 @@
                  %>
                 <a href="add_user">Add User</a>
                 <%}%>
+               
+                <%  //doesent do anything!!!
+                    if(request.getAttribute("mesasge") != null){
+                        out.print(request.getAttribute("message"));
+                    }
+                %>
     </body>
 </html>

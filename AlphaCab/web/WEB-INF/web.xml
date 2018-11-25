@@ -44,6 +44,18 @@
         <servlet-name>GetDriversServlet</servlet-name>
         <servlet-class>com.alphacab.controller.DriversServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveUserServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.RemoveUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteDriverServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.DeleteDriverServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.DeleteCustomerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -66,6 +78,18 @@
     <servlet-mapping>
         <servlet-name>GetDriversServlet</servlet-name>
         <url-pattern>/Drivers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveUserServlet</servlet-name>
+        <url-pattern>/RemoveUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDriverServlet</servlet-name>
+        <url-pattern>/DeleteDriver</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomerServlet</servlet-name>
+        <url-pattern>/DeleteCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

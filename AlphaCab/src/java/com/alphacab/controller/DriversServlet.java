@@ -97,9 +97,8 @@ public class DriversServlet extends HttpServlet {
 
             statement.setString(1, driverID);
             
-            rowCount = statement.execute();  //This doesnt do anything!!!
+            rowCount = statement.execute();
             
-            // Find better way of updating the table
             List<User> ulist = driverDao.getAllDrivers();
             request.setAttribute("driverList", ulist);
             

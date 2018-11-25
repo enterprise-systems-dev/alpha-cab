@@ -16,9 +16,9 @@
     <body>
         <jsp:include page="header.jsp"/>
         <h1>Welcome to the Drivers page</h1>
-        <form method="post" name="delete-user-form" action="Drivers">
-            <input type="text" name="selected-driver"> 
-            <input type="submit" name="delete-driver" value="Driver">
+        <form method="post" name="delete-driver-form" action="DeleteDriver">
+            <input type="text" name="selected-driver" placeholder="Driver`s ID"> 
+            <input type="submit" name="delete-driver" value="Delete driver">
         </form>
         Driver List<br>
         <form method="post">
