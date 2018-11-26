@@ -26,15 +26,15 @@
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Registration</th>
+              <th>Address</th>
             </tr>
         <%
             ArrayList<Customer> customerList = (ArrayList)request.getAttribute("customerList");
             for(Customer customer : customerList) {
                 out.print("<tr>");
                 out.print("<td>" + customer.getId() + "</td>");
-                out.print("<td>" + customer.getUsername()+ "</td>");  //getName
-                out.print("<td>" + customer.getPassword()+ "</td>");  //getAddress
+                out.print("<td>" + customer.getName()+ "</td>");  //getName
+                out.print("<td>" + customer.getAddress()+ "</td>");  //getAddress
                 out.print("</tr>");
             }
         %>

@@ -148,15 +148,24 @@ public abstract class UserDao {
         ResultSet resultSet = statement.executeQuery();
 
         User u;
+        
+        int id;
+        String uname;
+        String pword;
+        String role;
 
         while (resultSet.next()) {
 
-            u = new Driver(resultSet.getInt("ID"),
-                    resultSet.getString("USERNAME"),
-                    resultSet.getString("PASSWORD"),
-                    resultSet.getString("ROLE"));
+            id = resultSet.getInt("ID");
+            uname = resultSet.getString("USERNAME");
+            pword = resultSet.getString("PASSWORD");
+            role = resultSet.getString("ROLE");
+            
+            u = findSpecific(id, uname, pword, role);
 
-            userList.add(u);
+            if(u != null){
+                userList.add(u);
+            }
         }
 
         return userList;
@@ -175,62 +184,71 @@ public abstract class UserDao {
         ResultSet resultSet = statement.executeQuery();
 
         User u;
+        
+        int id;
+        String uname;
+        String pword;
+        String role;
 
         while (resultSet.next()) {
 
-            u = new Customer(resultSet.getInt("ID"),
-                    resultSet.getString("USERNAME"),
-                    resultSet.getString("PASSWORD"),
-                    resultSet.getString("ROLE"));
-
-            userList.add(u);
+            id = resultSet.getInt("ID");
+            uname = resultSet.getString("USERNAME");
+            pword = resultSet.getString("PASSWORD");
+            role = resultSet.getString("ROLE");
+            
+            u = findSpecific(id, uname, pword, role);
+            
+            if(u != null){
+                userList.add(u);
+            }
         }
 
         return userList;
     }
 
     //???
-    public List<User> getAllUsers() throws SQLException {
-
-        List<User> userList = new ArrayList();
-
-        String query = "SELECT * FROM users";
-
-        PreparedStatement statement = this.connection.prepareStatement(query);
-
-        ResultSet resultSet = statement.executeQuery();
-
-        User u = null;
-
-        int newId;
-        String newUname;
-        String newPword;
-        String newRole;
-
-        while (resultSet.next()) {
-
-            newId = resultSet.getInt("ID");
-            newUname = resultSet.getString("USERNAME");
-            newPword = resultSet.getString("PASSWORD");
-            newRole = resultSet.getString("ROLE");
-
-            switch (newRole) {
-                case "admin":
-                    u = new Admin(newId, newUname, newPword, newRole);
-                    break;
-                case "customer":
-                    u = new Customer(newId, newUname, newPword, newRole);
-                    break;
-                case "driver":
-                    u = new Driver(newId, newUname, newPword, newRole);
-                    break;
-                default:
-                //Error!!!
-                }
-
-            userList.add(u);
-        }
-
-        return userList;
-    }
+//    public List<User> getAllUsers() throws SQLException {
+//
+//        List<User> userList = new ArrayList();
+//
+//        String query = "SELECT * FROM users";
+//
+//        PreparedStatement statement = this.connection.prepareStatement(query);
+//
+//        ResultSet resultSet = statement.executeQuery();
+//
+//        User u = null;
+//
+//        int newId;
+//        String newUname;
+//        String newPword;
+//        String newRole;
+//
+//        while (resultSet.next()) {
+//
+//            newId = resultSet.getInt("ID");
+//            newUname = resultSet.getString("USERNAME");
+//            newPword = resultSet.getString("PASSWORD");
+//            newRole = resultSet.getString("ROLE");
+//
+//            switch (newRole) {
+//                case "admin":
+//                    u = new Admin(newId, newUname, newPword, newRole);
+//                    break;
+//                case "customer":
+//                    u = new Customer(newId, newUname, newPword, newRole);
+//                    break;
+//                case "driver":
+//                    u = new Driver(newId, newUname, newPword, newRole);
+//                    break;
+//                default:
+//                //Error!!!
+//                }
+//
+//            userList.add(u);
+//        }
+//
+//        return userList;
+//    }
 }

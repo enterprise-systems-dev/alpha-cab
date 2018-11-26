@@ -15,6 +15,12 @@ public class Customer extends User {
 
     private String address;
     
+    public Customer(int id, String username, String password, String role, String cName, String address) {
+        super(id, username, password, role);
+        name = cName;
+        this.address = address;
+    }
+    
     public Customer(String username, String password, String role, String cName, String address) {
         super(username, password, role);
         name = cName;
@@ -24,6 +30,10 @@ public class Customer extends User {
     public Customer(int id, String username, String password, String role) {
         super(id, username, password, role);
     }
+    
+//    public Customer(int id, String username, String password, String role) {
+//        super(id, username, password, role);
+//    }
 
     public String getName() {
         return name;

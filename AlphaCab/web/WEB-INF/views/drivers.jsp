@@ -33,8 +33,8 @@
             for(Driver driver : driverList) {
                 out.print("<tr>");
                 out.print("<td>" + driver.getId() + "</td>");
-                out.print("<td>" + driver.getUsername()+ "</td>");  //getName
-                out.print("<td>" + driver.getPassword()+ "</td>");  //getRegistration
+                out.print("<td>" + driver.getName()+ "</td>");  //getName
+                out.print("<td>" + driver.getRegistration()+ "</td>");  //getRegistration
                 out.print("</tr>");
             }
         %>

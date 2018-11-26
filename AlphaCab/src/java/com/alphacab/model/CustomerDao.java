@@ -64,8 +64,8 @@ public class CustomerDao extends UserDao {
                 
                 name = resultSet.getString("name");
                 address = resultSet.getString("address");
-                customer = new Customer(uname, pword, role, name, address);
-                customer.setId(userID);
+                customer = new Customer(userID, uname, pword, role, name, address);
+//                customer.setId(userID);
             }
             
         }  catch (SQLException ex) {
