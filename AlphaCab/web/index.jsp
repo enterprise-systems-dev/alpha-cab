@@ -15,20 +15,16 @@
     <body>
         <jsp:include page="/WEB-INF/views/header.jsp"/>
         <h1>WELCOME TO THE HOME PAGE!</h1>
-      <%  User sessionUser = (User)session.getAttribute("user");
+        <%  User sessionUser = (User)session.getAttribute("user");
             out.print(String.format("Hello %s, your user type is %s and id is %d", 
                 sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%><br><br>
                 
                 <%
                     if (sessionUser.getRole().equalsIgnoreCase("admin")) {
-                 %>
-                <a href="add_user">Add User</a>
-                <%}%>
-               
-                <%  //doesent do anything!!!
-                    if(request.getAttribute("mesasge") != null){
-                        out.print(request.getAttribute("message"));
-                    }
                 %>
+                <a href="AddUser">Add User</a><br>
+                <a href="RemoveUser">Remove User</a><br>
+                <%}%>
+                <a href="Logout">Log out</a>
     </body>
 </html>

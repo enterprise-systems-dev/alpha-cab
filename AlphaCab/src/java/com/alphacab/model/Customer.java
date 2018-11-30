@@ -5,50 +5,51 @@
  */
 package com.alphacab.model;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Trym
  */
 public class Customer extends User {
-
+    
     private String name;
-
     private String address;
     
-    public Customer(int id, String username, String password, String role, String cName, String address) {
-        super(id, username, password, role);
-        name = cName;
+    private static String ROLE = "customer";
+    
+    public Customer(String username, String password){
+        super(0, username, password);
+    }
+    public Customer(int id, String username, String password){
+        super(id, username, password);
+        this.name = "";
+        this.address = "";
+    } //Default constructor
+    public Customer(int id, String username, String password, String name, String address) {
+        super(id, username, password);
+        this.name = name;
         this.address = address;
     }
     
-    public Customer(String username, String password, String role, String cName, String address) {
-        super(username, password, role);
-        name = cName;
-        this.address = address;
+    @Override
+    public String getRole(){
+        return ROLE;
     }
     
-    public Customer(int id, String username, String password, String role) {
-        super(id, username, password, role);
-    }
-    
-//    public Customer(int id, String username, String password, String role) {
-//        super(id, username, password, role);
-//    }
-
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
 
     public String getAddress() {
-        return address;
+        return this.address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddress(String registration) {
+        this.address = registration;
     }
-    
 }

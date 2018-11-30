@@ -6,11 +6,9 @@
 package com.alphacab.controller;
 
 import com.alphacab.model.Admin;
-import com.alphacab.model.AdminDao;
-import com.alphacab.model.Customer;
-import com.alphacab.model.CustomerDao;
 import com.alphacab.model.Driver;
-import com.alphacab.model.DriverDao;
+import com.alphacab.model.Customer;
+import com.alphacab.model.UserDao;
 import java.io.IOException;
 import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
@@ -38,6 +36,7 @@ public class AddUserServlet extends HttpServlet {
             throws ServletException, IOException {
     }
 
+    //  Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -50,7 +49,7 @@ public class AddUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
-        view.forward(request, response);        
+        view.forward(request, response);
     }
 
     /**
@@ -64,108 +63,66 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        //PLAYER 3 (stamper) HAS ENTERED THE GAME B****
+        // ...caps lock comments are real dramatic btw...
+        
+        /*
+        *
+        *   NEEDS DOING:
+        *   TRANSITION THE ROLES INTO THE SWITCH RATHER THAN IF/ELSE
+        *   MAKE SURE THE USER AND ADMIN WORKS WITH THE NEW CLASS LAYOUT
+        *   IMPLEMENT CUSTOMER AND DRIVER CODE FOR THE NEW CLASSES
+        *
+        */
+        
+        //get general user fields
+        String user = request.getParameter("username-textbox");
+        String pass = request.getParameter("password-textbox");
+        
+        String role = request.getParameter("role").toLowerCase();
+        
+        //create db access obj
+        UserDao userDao = new UserDao();
+        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        
+        //flag for checking whether user was added to db successfully
+        boolean successful = false;
+        
+        //get user type, specific fields, and add to db
+        switch(role){
+            case("admin"):
+                Admin a = new Admin(user, pass);
+                
+                successful = userDao.saveUser(a);
+                break;
+            case("driver"):
+                Driver d = new Driver(user, pass);
+                
+                d.setName(request.getParameter("driver-name-textbox"));
+                d.setRegistration(request.getParameter("registration-textbox"));
+                
+                successful = userDao.saveUser(d);
+                break;
+            case("customer"):
+                Customer c = new Customer(user, pass);
+                
+                c.setName(request.getParameter("customer-name-textbox"));
+                c.setAddress(request.getParameter("address-textbox"));
+                
+                successful = userDao.saveUser(c);
+                break;
+        }
+        
+        //set request params on success and forward to add_user.jsp
+        if(successful == true)
+            request.setAttribute("message", "admin user added");
+        else
+            request.setAttribute("error", "Error adding admin user");
+        
+        //view - add user
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/add_user.jsp");
-
-        Connection c = (Connection) request.getServletContext().getAttribute("connection");
-        
-        String username = request.getParameter("username-textbox");
-
-        String password = request.getParameter("password-textbox");
-
-        String selectedRole = request.getParameter("role");
-
-        AdminDao adminDao = null;
-        Admin newAdmin = null;
-        
-        CustomerDao customerDao = null;
-        Customer newCustomer = null;
-        
-        DriverDao driverDao = null;
-        Driver newDriver = null;
-        
-        boolean savedSuccesfuly = false;
-        
-        String successMsg = " user added";
-        
-        String errorMsg = "Error adding ";
-
-        switch (selectedRole) {
-
-            case ("admin"):
-                
-                adminDao = new AdminDao();
-
-                newAdmin = new Admin(username, password, selectedRole);
-                
-                successMsg = selectedRole + successMsg;
-                
-                errorMsg = errorMsg + selectedRole;
-
-                break;
-
-            case ("customer"):
-
-                String cName = request.getParameter("customer-name-textbox");
-
-                String address = request.getParameter("address-textbox");
-                
-                customerDao = new CustomerDao();
-
-                newCustomer = new Customer(username, password, selectedRole, cName, address);
-
-                successMsg = selectedRole + successMsg;
-                
-                errorMsg = errorMsg + selectedRole;
-
-                break;
-
-            case ("driver"):
-
-                String dName = request.getParameter("driver-name-textbox");
-
-                String registration = request.getParameter("registration-textbox");
-                
-                driverDao = new DriverDao();
-                
-                newDriver = new Driver(username, password, selectedRole, dName, registration);
-
-                successMsg = selectedRole + successMsg;
-                
-                errorMsg = errorMsg + selectedRole;
-
-                break;
-
-            default:
-                //Error
-                break;
-        }
-
-        // Only one pair will be initialised
-        if(adminDao != null && newAdmin != null) {
-            adminDao.setConnection(c);
-            savedSuccesfuly = adminDao.saveUser(newAdmin);
-            
-        } else if(customerDao != null && newCustomer != null) {
-            customerDao.setConnection(c);
-            savedSuccesfuly = customerDao.saveUser(newCustomer);
-            
-        } else if(driverDao != null && newDriver != null) { 
-            driverDao.setConnection(c);
-            savedSuccesfuly = driverDao.saveUser(newDriver);
-            
-        } else {
-            // Error!!!
-        }
-        
-        if(savedSuccesfuly) {
-            request.setAttribute("message", successMsg);
-        } else {
-            request.setAttribute("error", errorMsg);
-        }
-
         view.forward(request, response);
-
     }
 
     /**
@@ -176,6 +133,6 @@ public class AddUserServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
 }

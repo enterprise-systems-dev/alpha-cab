@@ -55,7 +55,7 @@
     <body>
         <jsp:include page="header.jsp"/>
         <h1>Welcome to the Add User Page!</h1>
-        <form method="post" action="add_user">
+        <form method="post" action="AddUser">
         Select User Role: 
         <select name="role" onchange=displayRoleInputs(this.value);>
             <option value="admin">Admin</option>
@@ -75,6 +75,10 @@
         </div>
             <input name="add-user-button" type="submit" value="Add User"/>
         </form>
+        <br><br>
+        <a href="RemoveUser">Remove User</a><br>
+        <a href="Logout">Log out</a>
+        <br><br>
             <%
                 if(request.getAttribute("error") != null) {
                     out.print(request.getAttribute("error"));
@@ -82,6 +86,6 @@
                 if(request.getAttribute("message") != null) {
                     out.print(request.getAttribute("message"));
                 }
-            %> 
+            %>
     </body>
 </html>

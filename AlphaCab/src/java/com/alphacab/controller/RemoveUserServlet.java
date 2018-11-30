@@ -5,10 +5,11 @@
  */
 package com.alphacab.controller;
 
-import com.alphacab.model.CustomerDao;
 import com.alphacab.model.User;
+import com.alphacab.model.UserDao;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,13 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author marcus
+ * @author Darren
  */
-public class DeleteCustomerServlet extends HttpServlet {
+public class RemoveUserServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -46,6 +46,22 @@ public class DeleteCustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        System.out.print("0-------------------------------------------------------");
+        
+        //create db access obj
+        UserDao userDao = new UserDao();
+        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        
+        //add user list to request
+        List<User> userList = userDao.getAllUsers();
+        request.setAttribute("userList",userList);
+        
+        System.out.print("01------------------------------------------------------");
+        
+        //view - remove user
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/remove_user.jsp");
+        view.forward(request, response);
     }
 
     /**
@@ -59,26 +75,29 @@ public class DeleteCustomerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
         
-        Connection c = (Connection) request.getServletContext().getAttribute("connection");
+        //create db access obj
+        UserDao userDao = new UserDao();
+        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+
+        //get id of user to delete
+        int userID = Integer.parseInt(request.getParameter("userID"));
         
-        String customerToDelete = request.getParameter("selected-customer");
+        //remove user
+        boolean successful = userDao.removeUser(userID);
         
-        CustomerDao customerDao = new CustomerDao();
+        //add user list to request
+        List<User> userList = userDao.getAllUsers();
+        request.setAttribute("userList",userList);
         
-        customerDao.setConnection(c);
+        //set request params on success and forward to add_user.jsp
+        if(successful == true)
+            request.setAttribute("message", "user removed");
+        else
+            request.setAttribute("error", "Error removing user");
         
-        //select driver
-        User u = customerDao.findUserByID(Integer.parseInt(customerToDelete));
-        
-        //delete driver
-        if(customerDao.deleteUser(u)) {
-            request.setAttribute("message", "Customer deleted");
-        } else {
-            request.setAttribute("error", "Could not delete customer");
-        }
-        
+        //view - remove user
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/remove_user.jsp");
         view.forward(request, response);
     }
 

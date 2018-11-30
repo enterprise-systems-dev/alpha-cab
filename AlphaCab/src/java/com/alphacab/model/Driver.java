@@ -5,30 +5,42 @@
  */
 package com.alphacab.model;
 
+import java.sql.Connection;
+
 /**
  *
  * @author Paul, Trym
  */
 public class Driver extends User {
-
-    private String name;
     
+    private String name;
     private String registration;
     
-    public Driver(String username, String password, String role, String dName, String registration) {
-        super(username, password, role);
-        name = dName;
+    private static String ROLE = "driver";
+    
+    public Driver(String username, String password){
+        super(0, username, password);
+    }
+    public Driver(int id, String username, String password){
+        super(id, username, password);
+        this.name = "";
+        this.registration = "";
+    } //Default constructor
+    public Driver(int id, String username, String password, String name, String registration) {
+        super(id, username, password);
+        this.name = name;
         this.registration = registration;
     }
-
-    public Driver(int id, String username, String password, String role) {
-        super(id, username, password, role);
+    
+    @Override
+    public String getRole(){
+        return ROLE;
     }
-
+    
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -40,5 +52,4 @@ public class Driver extends User {
     public void setRegistration(String registration) {
         this.registration = registration;
     }
-    
 }

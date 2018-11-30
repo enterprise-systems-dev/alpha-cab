@@ -16,13 +16,9 @@
     <body>
         <jsp:include page="header.jsp"/>
         <h1>Welcome to the Drivers page</h1>
-        <form method="post" name="delete-driver-form" action="DeleteDriver">
-            <input type="text" name="selected-driver" placeholder="Driver`s ID"> 
-            <input type="submit" name="delete-driver" value="Delete driver">
-        </form>
         Driver List<br>
         <form method="post">
-        <table style="width:25%">
+        <table style="width:100%">
             <tr>
               <th>ID</th>
               <th>Name</th>
@@ -33,8 +29,8 @@
             for(Driver driver : driverList) {
                 out.print("<tr>");
                 out.print("<td>" + driver.getId() + "</td>");
-                out.print("<td>" + driver.getName()+ "</td>");  //getName
-                out.print("<td>" + driver.getRegistration()+ "</td>");  //getRegistration
+                out.print("<td>" + driver.getName() + "</td>");
+                out.print("<td>" + driver.getRegistration() + "</td>");
                 out.print("</tr>");
             }
         %>

@@ -6,12 +6,8 @@
 
 package com.alphacab.controller;
 
-import com.alphacab.model.CustomerDao;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,17 +44,7 @@ public class CustomersServlet extends HttpServlet {
         
         // get all customers and list
         
-        CustomerDao customerDao = new CustomerDao();
-        
-        customerDao.setConnection(((Connection)request.getServletContext().getAttribute("connection")));
-        
-        try {
-            request.setAttribute("customerList", customerDao.getAllCustomers());
-        } catch (SQLException ex) {
-            Logger.getLogger(DriversServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/customers.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/customers/customers.jsp");
         view.forward(request, response);
     } 
 

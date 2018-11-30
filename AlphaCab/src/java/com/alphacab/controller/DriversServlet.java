@@ -6,14 +6,11 @@
 
 package com.alphacab.controller;
 
-import com.alphacab.model.DriverDao;
-import com.alphacab.model.User;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -49,20 +46,16 @@ public class DriversServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
         // get all drivers from db and forward to drivers.jsp
         
-        DriverDao driverDao = new DriverDao();
+        //create db access obj
+        UserDao UserDao = new UserDao();
+        UserDao.connect((Connection)request.getServletContext().getAttribute("connection"));
         
-        driverDao.setConnection((Connection)request.getServletContext().getAttribute("connection"));
+        //add driverList to request
+        request.setAttribute("driverList", UserDao.getAllDrivers());
         
-        try {
-            List<User> ulist = driverDao.getAllDrivers();
-            request.setAttribute("driverList", ulist);
-        } catch (SQLException ex) {
-            Logger.getLogger(DriversServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        //view - drivers
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/drivers.jsp");
         view.forward(request, response);
     } 
