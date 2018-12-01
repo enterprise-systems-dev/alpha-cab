@@ -17,6 +17,7 @@
         <title>Remove User</title>
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
         <h1>Welcome to the remove user page</h1>
         User List<br>
         <table style="width:100%">
