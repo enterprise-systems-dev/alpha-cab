@@ -6,11 +6,11 @@
     </context-param>
     <context-param>
         <param-name>dbUser</param-name>
-        <param-value>username</param-value>
+        <param-value>root</param-value>
     </context-param>
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value>password</param-value>
+        <param-value>P@ssw0rd!</param-value>
     </context-param>
     <filter>
         <filter-name>LoginFilter</filter-name>

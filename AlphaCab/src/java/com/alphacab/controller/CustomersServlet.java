@@ -6,8 +6,10 @@
 
 package com.alphacab.controller;
 
+import com.alphacab.model.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +46,15 @@ public class CustomersServlet extends HttpServlet {
         
         // get all customers and list
         
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/customers/customers.jsp");
+        //create db access obj
+        UserDao UserDao = new UserDao();
+        UserDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        
+        //add driverList to request
+        request.setAttribute("customerList", UserDao.getAllCustomers());
+        
+        //view - drivers
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/customers.jsp");
         view.forward(request, response);
     } 
 

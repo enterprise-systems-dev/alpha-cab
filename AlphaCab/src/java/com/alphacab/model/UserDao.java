@@ -274,16 +274,67 @@ public class UserDao {
         
         return userList;
     }
+    
+    public List<Customer> getAllCustomers(){
+        List<Customer> customerList = new ArrayList();
+                
+        try{
+            //get results
+            query( "SELECT * FROM USERS WHERE role='customer'" );
+                       
+            //iterate over results
+            while(rs.next()){
+                
+                PreparedStatement ps = con.prepareStatement("SELECT * FROM CUSTOMER WHERE USERID = ?");
+                
+                ps.setInt(1, rs.getInt(1));
+                
+                ResultSet rSet = ps.executeQuery();
+                
+                // some customers are only present in the users table 
+                // but not in the customers table this can cause SQL exceptions
+                // so use this to skip them.
+                if(!rSet.next()){
+                    System.out.println("Customer not fount in customer list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    continue;
+                }
+                                
+                Customer c = new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rSet.getString(2), rSet.getString(3));
+                customerList.add(c);
+            }
+        }
+        catch(SQLException e){
+            System.out.println("Failed to get customer list - SQLException:" + e);
+        }
+        
+        return customerList;
+    }
+    
     public List<Driver> getAllDrivers(){
         List<Driver> driverList = new ArrayList();
-        
+                
         try{
             //get results
             query( "SELECT * FROM USERS WHERE role='driver'" );
-            
+                       
             //iterate over results
             while(rs.next()){
-                Driver u = new Driver(rs.getInt(1), rs.getString(2), rs.getString(3));
+                
+                PreparedStatement ps = con.prepareStatement("SELECT * FROM DRIVERS WHERE USERID = ?");
+                
+                ps.setInt(1, rs.getInt(1));
+                
+                ResultSet rSet = ps.executeQuery();
+                
+                // some drivers are only present in the users table 
+                // but not in the drivers table this can cause SQL exceptions
+                // so use this to skip them.
+                if(!rSet.next()){
+                    System.out.println("Driver not fount in driver list!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    continue;
+                }
+                                
+                Driver u = new Driver(rs.getInt(1), rs.getString(2), rs.getString(3), rSet.getString(3), rSet.getString(2));
                 driverList.add(u);
             }
         }
