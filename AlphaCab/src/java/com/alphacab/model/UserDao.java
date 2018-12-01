@@ -201,7 +201,7 @@ public class UserDao {
                         case "driver":
                             
                             //get driver specific attributes
-                            boolean gotDriver = query("SELECT * FROM DRIVERS WHERE ID=" +userID+ "");
+                            boolean gotDriver = query("SELECT * FROM DRIVERS WHERE USERID=" +userID+ "");
                             if (gotDriver == true){
                                 while(rs.next()){
                                     String reg = rs.getString(2);
