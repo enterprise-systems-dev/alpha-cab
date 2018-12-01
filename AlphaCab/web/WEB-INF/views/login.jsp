@@ -26,6 +26,11 @@
                 }
             %>
         </form>
-
+        <br>
+        Don`t want to register but still need a Noober?
+        <form method="post" name="guest-login-form" action="Login">
+            <input type="hidden" name="guest-form" value="guest-login-form">
+            <input type="submit" name="guest-login" value="Get an emergency Noober"/>
+        </form>
     </body>
 </html>

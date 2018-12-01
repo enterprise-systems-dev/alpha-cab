@@ -24,17 +24,17 @@ import javax.servlet.http.HttpSession;
  * @author Paul
  */
 public class LoginFilter implements Filter {
-    
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
+
     public LoginFilter() {
-    }    
-    
+    }
+
     /**
      *
      * @param request The servlet request we are processing
@@ -47,51 +47,49 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res,
             FilterChain chain)
             throws IOException, ServletException {
-        
+
         if (debug) {
             log("LoginFilter:doFilter()");
         }
-               
+        
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
-        
+
         HttpSession session = request.getSession(false);
         String loginURI = request.getContextPath() + "/Login";
 
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         boolean loginRequest = request.getRequestURI().equals(loginURI);
-        
+
         // if user is already logged in and tries to go to login page, redirect to home page
-        if(loggedIn && loginRequest) {
+        if (loggedIn && loginRequest) {
             response.sendRedirect("index.jsp");
-        // if user is logged in, allow access
+            // if user is logged in, allow access
         } else if (loggedIn || loginRequest) {  //NOT WORKING!!!
             // prevent user from going back to login page using browser 'Back' button
             response.setContentType("text/html;charset=UTF-8");
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
             response.setHeader("Expires", "0");
             chain.doFilter(request, response);
-        // user is not logged in, redirect to login page
+            // user is not logged in, redirect to login page
         } else {
             response.sendRedirect(loginURI);
         }
-        
-
     }
 
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
+            if (debug) {
                 log("LoginFilter:Initializing filter");
             }
         }
@@ -110,20 +108,20 @@ public class LoginFilter implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -140,7 +138,7 @@ public class LoginFilter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -154,9 +152,9 @@ public class LoginFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }

@@ -18,6 +18,12 @@ public class Customer extends User {
     
     private static String ROLE = "customer";
     
+    // For guests
+    public Customer(String name) {
+        super(name);
+        this.name = name;
+    }
+    
     public Customer(String username, String password){
         super(0, username, password);
     }

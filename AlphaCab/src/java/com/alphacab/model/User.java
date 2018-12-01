@@ -16,6 +16,12 @@ public abstract class User {
     private String username;
     private String password;
 
+    // For guests
+    public User(String username) {
+        this.id = 1;
+        this.username = username;
+    }
+    
     public User(String username, String password) {
         this.username = username;
         this.password = password;

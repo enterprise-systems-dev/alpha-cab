@@ -5,6 +5,7 @@
  */
 package com.alphacab.controller;
 
+import com.alphacab.model.Customer;
 import com.alphacab.model.User;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
@@ -76,8 +77,17 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username-textbox");
         String password = request.getParameter("password-textbox");
         
-        //get user
-        User u = userDao.getUser(username, password);
+        User u = null;
+        
+        //very hacky way to do guest logins
+        String guest = request.getParameter("guest-form");
+        
+        if (guest != null) {
+            u = new Customer("Guest");
+        } else {
+             //get user
+            u = userDao.getUser(username, password);
+        }
         
         if(u != null){
             // create user session and cookie
