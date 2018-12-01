@@ -43,6 +43,10 @@
             --%>
             <input type="submit" name="call-noober-button" value="Call Noober">
         </form>
+            
+            <form method="get" action="CallNoober">
+                <input type="submit" name="view-noober-history-button" value="Noober History">
+            </form>
         <%}%>
         <a href="Logout">Log out</a>
         

@@ -374,5 +374,35 @@ public class UserDao {
         
         return false;
     }
+    
+    public List<Demand> getDemandsForCustomer(Customer customer) {
+        
+        List<Demand> demands = new ArrayList<>();
+        
+        String s = "SELECT * FROM DEMANDS WHERE CUSTOMERID = ?";
+        
+        Demand tempDemand;
+        
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(s);
+            ps.setInt(1, customer.getId());
+            
+            ResultSet rSet = ps.executeQuery();
+            
+            while (rSet.next()) {
+                tempDemand = new Demand(rSet.getInt(1), rSet.getString(2), rSet.getString(3), rSet.getString(4), rSet.getString(5), rSet.getString(6), rSet.getString(7), rSet.getInt(8));
+                
+                demands.add(tempDemand);
+                
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Failed to get demands for customer - SQLException:" + e);
+        }
+        
+        return demands;
+        
+    }
 }
     

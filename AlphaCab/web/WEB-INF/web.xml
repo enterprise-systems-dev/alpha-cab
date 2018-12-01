@@ -91,6 +91,11 @@
         <servlet-name>CallNooberServlet</servlet-name>
         <url-pattern>/CallNoober</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CallNooberServlet</servlet-name>
+        <url-pattern>/NooberHistory</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             20

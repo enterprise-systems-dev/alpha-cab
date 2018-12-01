@@ -49,6 +49,31 @@ public class CallNooberServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //create db access obj
+        UserDao UserDao = new UserDao();
+        UserDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        
+        // Get the current session wthout creating one it it dosent exist
+        HttpSession currentSession = request.getSession(false);
+        
+        Customer logedInCustomer;
+        
+        // Check if there is a loged in user
+        if (currentSession == null) {
+            System.out.println("No session found !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        } else {
+            
+            // What if user is not a customer, will that ever happen???
+            logedInCustomer = (Customer) currentSession.getAttribute("user");
+            
+            //add demandList to request
+            request.setAttribute("demandList", UserDao.getDemandsForCustomer(logedInCustomer));
+            
+        }
+        
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/noober_history.jsp");
+        view.forward(request, response);
+        
     }
 
     /**
