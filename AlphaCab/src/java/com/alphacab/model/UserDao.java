@@ -214,7 +214,7 @@ public class UserDao {
                             break;
                         case "customer":
                             //get customer specific attributes
-                            boolean gotCustomer = query("SELECT * FROM CUSTOMER WHERE ID=" +userID+ "");
+                            boolean gotCustomer = query("SELECT * FROM CUSTOMER WHERE USERID=" +userID+ "");
                             if (gotCustomer == true){
                                 while (rs.next()){
                                     String name = rs.getString(2);
@@ -343,6 +343,36 @@ public class UserDao {
         }
         
         return driverList;
+    }
+    
+    public boolean addDemand(String name, String startAddress, String endAddress, 
+            String pickupDate, String pickupTime, int customerID) {
+        
+        String sqlStatement = "INSERT INTO DEMANDS (name, address, destination, date, time, status, customerid) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+        try{
+            
+            PreparedStatement newDemand = con.prepareStatement(sqlStatement);
+            
+            newDemand.setString(1, name);
+            newDemand.setString(2, startAddress);
+            newDemand.setString(3, endAddress);
+            newDemand.setString(4, pickupDate);
+            newDemand.setString(5, pickupTime);
+            newDemand.setBoolean(6, false);  // False = not complete
+            newDemand.setInt(7, customerID);
+            
+            int udatedRows = newDemand.executeUpdate();
+            
+            if (udatedRows > 0) {
+                return true;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Failed to add new demand - SQLException:" + e);
+        }
+        
+        return false;
     }
 }
     
