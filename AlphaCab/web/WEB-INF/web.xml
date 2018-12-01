@@ -52,6 +52,10 @@
         <servlet-name>HomePage</servlet-name>
         <jsp-file>index.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>CallNooberServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.CallNooberServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -82,6 +86,10 @@
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/Home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CallNooberServlet</servlet-name>
+        <url-pattern>/CallNoober</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

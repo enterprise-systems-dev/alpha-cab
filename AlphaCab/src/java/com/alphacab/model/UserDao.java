@@ -359,7 +359,7 @@ public class UserDao {
             newDemand.setString(3, endAddress);
             newDemand.setString(4, pickupDate);
             newDemand.setString(5, pickupTime);
-            newDemand.setBoolean(6, false);  // False = not complete
+            newDemand.setString(6, "Outstanding");
             newDemand.setInt(7, customerID);
             
             int udatedRows = newDemand.executeUpdate();
