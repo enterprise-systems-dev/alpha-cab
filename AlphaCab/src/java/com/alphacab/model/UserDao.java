@@ -462,19 +462,52 @@ public class UserDao {
         return availableDrivers;
     }
     
-    public List<Demand> getAllDemands() {
+    public List<Demand> getOutstandingDemands() {
         
-        List<Demand> allDemands = new ArrayList<>();
+        List<Demand> outstandingDemands = new ArrayList<>();
         
         // Get all customers
         List<Customer> tempCustomers = getAllCustomers();
         
-        // Get demands for each customer and add to list
+        // Get demands for each customer
         for (Customer c : tempCustomers) {
-            allDemands.addAll(getDemandsForCustomer(c));
+            for (Demand d : getDemandsForCustomer(c)) {
+                
+                // Only keep outstanding demands
+                if (d.getStatus().equals("Outstanding")) {
+                    outstandingDemands.add(d);
+                }
+            }
         }
         
-        return allDemands;
+        return outstandingDemands;
+    }
+    
+    public boolean assignJobToDriver(int driverID, int jobID) {
+        
+        List<Driver> tempDriverList = getAllDrivers();
+        Driver driver = null;
+        
+        for (Driver d : tempDriverList) {
+            // Driver found!
+            if(d.getId() == driverID){
+                driver = d;
+                break;
+            }
+        }
+        
+        // if driver was found give him the job
+        if (driver != null) {
+            driver.setBusy(true);
+            driver.setCustomerID(jobID);
+            
+            //remove demand
+            
+            return true;
+            
+        } else {
+            return false;
+        }
     }
 }
     

@@ -55,11 +55,11 @@ public class AssignJobsServlet extends HttpServlet {
         
         userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
         
-        request.setAttribute("outstandingDemands", userDao.getAllDemands());
+        request.setAttribute("outstandingDemands", userDao.getOutstandingDemands());
         
         request.setAttribute("availableDrivers", userDao.getAvailableDrivers());
                         
-        view.forward(request, response);        
+        view.forward(request, response);
     }
 
     /**
@@ -76,9 +76,40 @@ public class AssignJobsServlet extends HttpServlet {
         
         // Give selected driver the selected demand
         
-        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+//        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/assign_jobs.jsp");
+        int driverID = 0;
+        int jobID = 0;
+                
+        try {
+            driverID = Integer.parseInt(request.getParameter("driverID"));
+            jobID = Integer.parseInt(request.getParameter("jobID"));
+            
+        } catch (NumberFormatException e) {
+            System.out.println("Input has to ba a digit - NumberFormatException:" + e);
+            
+            request.setAttribute("error", "Input has to be an integer");
+            
+            // Bad practice, find better way to do this !!!!!!!!
+            doGet(request, response);
+//            view.forward(request, response);
+            
+        }
         
-        view.forward(request, response);
+        UserDao userDao = new UserDao();
+        
+        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        
+        // if something goes wrong
+        if (!userDao.assignJobToDriver(driverID, jobID)) {
+            request.setAttribute("error", "Could not assign jod to driver");
+        }
+        
+        request.setAttribute("message", "Driver " + driverID + " was assigned job " + jobID);
+        
+//        view.forward(request, response);        
+        // Bad practice, find better way to do this !!!!!!!!
+        doGet(request, response);
+//        view.forward(request, response);
     }
 
     /**

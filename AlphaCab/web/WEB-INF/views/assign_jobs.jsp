@@ -17,12 +17,27 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
+        <h3>Select Driver and Customer</h3>
+        <form method="post" name="give-jobs-form" action="AssignJobs">
+            Enter drivers ID: <input type="text" name="driverID" placeholder="Drivers ID"><br>
+            Enter job ID: <input type="text" name="jobID" placeholder="Job ID"><br>
+            <input type="submit" name="assign-driver-button" value="Assign Driver">
+        </form>
+        <%
+            if (request.getAttribute("error") != null) {
+                out.print(request.getAttribute("error"));
+            }
+            if (request.getAttribute("message") != null) {
+                out.print(request.getAttribute("message"));
+            }
+        %>
         <h1>Available drivers</h1>
         <table style="width:100%">
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Registration</th>
+                <th>Status</th>
             </tr>
         <%
             ArrayList<Driver> driverList = (ArrayList)request.getAttribute("availableDrivers");
@@ -31,6 +46,7 @@
                 out.print("<td>" + driver.getId() + "</td>");
                 out.print("<td>" + driver.getName() + "</td>");
                 out.print("<td>" + driver.getRegistration() + "</td>");
+                out.print("<td>" + driver.isBusy() + "</td>");
                 out.print("</tr>");
             }
         %>
