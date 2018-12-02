@@ -16,6 +16,7 @@
         <title>Daily Report</title>
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
         <h1>Daily Report for 
             <%
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

@@ -8,6 +8,7 @@ package com.alphacab.controller;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,9 +49,11 @@ public class AssignJobsServlet extends HttpServlet {
         
         // Display outstanding demands and available drivers
         
-        RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/assign_jobs.jsp");
         
         UserDao userDao = new UserDao();
+        
+        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
         
         request.setAttribute("outstandingDemands", userDao.getAllDemands());
         

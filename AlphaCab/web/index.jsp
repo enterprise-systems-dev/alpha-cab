@@ -25,6 +25,7 @@
         <a href="AddUser">Add User</a><br>
         <a href="RemoveUser">Remove User</a><br>
         <a href="DailyReport"> Daily Report</a><br>
+        <a hret="AssignJobs"> Assign Jobs</a><br>
         <%}%>
 
         <%
