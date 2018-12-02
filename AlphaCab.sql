@@ -71,6 +71,7 @@ CREATE TABLE Drivers (
   Registration varchar(10) NOT NULL,
   Name varchar(20),
   userid int,
+  status varchar(20),
   PRIMARY KEY (Registration)
 );
 
