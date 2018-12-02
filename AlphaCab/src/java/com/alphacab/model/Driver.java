@@ -15,6 +15,7 @@ public class Driver extends User {
     
     private String name;
     private String registration;
+    private boolean busy;
     
     private static String ROLE = "driver";
     
@@ -51,5 +52,13 @@ public class Driver extends User {
 
     public void setRegistration(String registration) {
         this.registration = registration;
+    }
+
+    public boolean isBusy() {
+        return busy;
+    }
+
+    public void setBusy(boolean busy) {
+        this.busy = busy;
     }
 }
