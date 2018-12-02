@@ -21,6 +21,23 @@
         <input type="text" name="date-textbox" placeholder="yyyy-mm-dd"><br><br>
         <input type="submit" name="get-bookings-button" value="Get Bookings">
 
+        <jsp:include page="header.jsp"/>
+        <h1>Daily Report for 
+            <%
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                out.print(sdf.format(date));
+            %>
+        </h1>
+        <table>
+        <tr>
+          <th>Customer Name</th>
+          <th>Driver</th>
+          <th>Address</th>
+          <th>Destination</th>
+          <th>Distance</th>
+          <th>Cost</th>
+        </tr>
             <% 
                 // servlet returns list of journeys
                 ArrayList<Journey> journeyList = (ArrayList)request.getAttribute("journeyList");

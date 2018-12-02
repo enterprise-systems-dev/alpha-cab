@@ -13,12 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -440,6 +437,41 @@ public class UserDao {
         
         return journeyList;
         
+    }
+    
+    public List<Driver> getAvailableDrivers() {
+        
+        List<Driver> availableDrivers = new ArrayList<>();
+        
+        // Get all drivers
+        availableDrivers = getAllDrivers();
+        
+        // Remove busy drivers
+        for (Driver d : availableDrivers) {
+            if (d.isBusy()) {
+                
+                // Create a list that only contains d and remove all instances of it
+                // From availableDrivers
+                availableDrivers.removeAll(Collections.singletonList(d));
+            }
+        }
+        
+        return availableDrivers;
+    }
+    
+    public List<Demand> getAllDemands() {
+        
+        List<Demand> allDemands = new ArrayList<>();
+        
+        // Get all customers
+        List<Customer> tempCustomers = getAllCustomers();
+        
+        // Get demands for each customer and add to list
+        for (Customer c : tempCustomers) {
+            allDemands.addAll(getDemandsForCustomer(c));
+        }
+        
+        return allDemands;
     }
 }
     
