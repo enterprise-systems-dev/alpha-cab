@@ -23,6 +23,8 @@ I have been working on the Customers functionalities, they can now book a cab an
 
 I am going to get admin to pass demands to drivers and drivers to complete them and turn them into journeys. List journeys might not work because there are no journeys today.
 
+Before letting the admin assign jobs to drivers we need to know how will the driver know what jobs to do. Will it be through objects or though the database?
+
 Marcus
 
 
