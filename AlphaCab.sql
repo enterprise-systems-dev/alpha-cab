@@ -36,6 +36,7 @@ CREATE TABLE Customer (
 Alter table Customer add foreign key (userid) references Users;
 
 INSERT INTO Customer (Name, Address, userid) VALUES
+('Mr Test Customer', '123 Test Lane', 3),
 ('Eva Smith', '129 Station Rd, London, N3 2AS', 4),
 ('Rob Manton', '23 Bow Lane, London, N3', 5),
 ('Bob Currie', '54 Teignmouth Rd, London, NW2', 6),
@@ -76,6 +77,7 @@ CREATE TABLE Drivers (
 Alter table Drivers add foreign key (userid) references Users;
 
 INSERT INTO Drivers (Registration, Name, userid) VALUES
+('123T35T', 'Test Smith', 2),
 ('AK52VZV', 'John Smith', 11),
 ('BN60WKA', 'Mehmet Aydin', 12),
 ('R34AKP', 'Mark Johnson', 13);
