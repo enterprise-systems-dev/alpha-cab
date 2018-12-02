@@ -6,8 +6,9 @@ Implementation of a web-based booking system for Alpha-Cab Ltd minicab company.
 * Admin 
   * List all drivers (Working)
   * List all customers (Working)
-  * Daily report (turnover, no. customers served)
+  * Daily report (turnover, no. customers served) (Working)
     * Added `daily_report.jsp` that gets an arraylist of type Journey from servlet and displays in table with total turnover
+    * TODO: add date validation in servlet, so that invalid dates cannot be entered
   * List all customers served per day (including: destination, charge)
   *	Create invoice (cost, costWithVAT)
   *	Change price of destination
