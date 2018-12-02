@@ -85,10 +85,13 @@ INSERT INTO Drivers (Registration, Name, userid) VALUES
 --DROP Table Journey;
 CREATE TABLE Journey (
   id int NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
+  Name varchar(20),
+  Address varchar(60),
   customerid int NOT NULL,
   Destination varchar(60),
   Distance integer NOT NULL DEFAULT 1,
   Registration varchar(10) NOT NULL,
+  Cost float,
   Date date NOT NULL,
   Time time DEFAULT NULL,
   PRIMARY KEY (id)
@@ -97,9 +100,9 @@ CREATE TABLE Journey (
 Alter table Journey add foreign key (customerid) references Customer;
 Alter table Journey add foreign key (Registration) references Drivers;
 
-INSERT INTO Journey (Destination, Distance, customerid, Registration, Date, Time) VALUES
-('King''s Cross Station, London', 5, 1, 'BN60WKA', '2015-10-14', '09:30:00'),
-('Heathrow Terminal 3, London', 20, 7, 'BN60WKA', '2015-10-14', '12:00:00'),
-('120 Green Lanes, London, N13', 7, 7, 'AK52VZV', '2015-10-15', '06:00:00'),
-('131 Stoke Newington High Road, London, N12', 8, 7, 'AK52VZV', '2015-10-15', '12:00:00'),
-('Luton Airport, Luton', 30, 1, 'R34AKP', '2015-10-22', '10:00:00');
+INSERT INTO Journey (Name, Address, Destination, Distance, customerid, Registration, Date, Time) VALUES
+('Eva Smith', 'Finchley, London', 'King''s Cross Station, London', 5, 4, 'BN60WKA', '2015-10-14', '09:30:00'),
+('Jim Hunter', '765 High Road, London, N12', 'Heathrow Terminal 3, London', 20, 7, 'BN60WKA', '2015-10-14', '12:00:00'),
+('Jim Hunter', '765 High Road, London, N12', '120 Green Lanes, London, N13', 7, 7, 'AK52VZV', '2015-10-15', '06:00:00'),
+('Jim Hunter', '765 High Road, London, N12', '131 Stoke Newington High Road, London, N12', 8, 7, 'AK52VZV', '2015-10-15', '12:00:00'),
+('Eva Smith', 'Finchley, London', 'Luton Airport, Luton', 30, 4, 'R34AKP', '2015-10-22', '10:00:00');
