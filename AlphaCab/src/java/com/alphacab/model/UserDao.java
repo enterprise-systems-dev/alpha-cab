@@ -8,10 +8,12 @@ package com.alphacab.model;
 import testing.MyShit;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -402,6 +404,40 @@ public class UserDao {
         }
         
         return demands;
+        
+    }
+    
+    public List<Journey> getTodaysJourneys() {
+        
+        List<Journey> journeyList = new ArrayList<>();
+        
+        String s = "SELECT * FROM JOURNEY WHERE DATE = ?";
+        
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date utilDate = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        
+        Journey tempJourney;
+        
+        try{
+            PreparedStatement ps = con.prepareStatement(s);
+            ps.setDate(1, sqlDate);
+            
+            ResultSet rSet = ps.executeQuery();
+            
+            while (rSet.next()) {
+                
+                tempJourney = new Journey(rSet.getString(2), rSet.getString(3), rSet.getInt(4), rSet.getString(5), rSet.getInt(6), rSet.getString(7), rSet.getInt(8), rSet.getDate(9), rSet.getTime(10));
+                
+                journeyList.add(tempJourney);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("Failed to get journey - SQLException:" + e);
+        }
+        
+        
+        return journeyList;
         
     }
 }

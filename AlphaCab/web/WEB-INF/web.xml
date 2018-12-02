@@ -68,6 +68,10 @@
         <servlet-name>GuestLoginServlet</servlet-name>
         <servlet-class>com.alphacab.controller.GuestLoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MakeDailyReportServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.MakeDailyReportServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -110,6 +114,10 @@
     <servlet-mapping>
         <servlet-name>GuestLoginServlet</servlet-name>
         <url-pattern>/GuestLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MakeDailyReportServlet</servlet-name>
+        <url-pattern>/DailyReport</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

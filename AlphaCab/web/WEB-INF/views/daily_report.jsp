@@ -4,6 +4,7 @@
     Author     : Paul
 --%>
 
+<%@page import="com.alphacab.model.Journey"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
