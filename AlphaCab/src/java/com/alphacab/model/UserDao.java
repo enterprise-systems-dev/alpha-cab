@@ -13,12 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -408,15 +405,15 @@ public class UserDao {
         
     }
     
-    public List<Journey> getTodaysJourneys() {
+    public List<Journey> getTodaysJourneys(Date date) {
         
         List<Journey> journeyList = new ArrayList<>();
         
-        String s = "SELECT * FROM JOURNEY WHERE DATE = ?";
+        String s = "SELECT * FROM JOURNEY WHERE Date = ?";
         
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date utilDate = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        System.out.println(date.toString());
+        
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         
         Journey tempJourney;
         

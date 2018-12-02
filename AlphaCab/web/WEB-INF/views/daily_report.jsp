@@ -16,6 +16,11 @@
         <title>Daily Report</title>
     </head>
     <body>
+        <h1>Daily Report by Date</h1>
+        <form method="post" action="DailyReport">
+        <input type="text" name="date-textbox" placeholder="yyyy-mm-dd"><br><br>
+        <input type="submit" name="get-bookings-button" value="Get Bookings">
+
         <jsp:include page="header.jsp"/>
         <h1>Daily Report for 
             <%
@@ -37,6 +42,20 @@
                 // servlet returns list of journeys
                 ArrayList<Journey> journeyList = (ArrayList)request.getAttribute("journeyList");
                 
+                String stringDate = new SimpleDateFormat("yyyy-MM-dd").format((Date)request.getAttribute("date"));
+                
+                if(journeyList != null && journeyList.size() > 0) { // prevents table headers being displayed if there are no results
+                    
+                out.print("<table style=\"width:100%\">");
+                out.print("<tr>");
+                out.print("<th>Customer Name</th>");
+                out.print("<th>Driver</th>");
+                out.print("<th>Address</th>");
+                out.print("<th>Destination</th>");
+                out.print("<th>Distance</th>");
+                out.print("<th>Cost</th>");
+                out.print("</tr>");
+                    
                 float total = 0;
                 
                 for(Journey journey : journeyList) {
@@ -46,15 +65,20 @@
                     out.print("<td>" + journey.getAddress() + "</td>");
                     out.print("<td>" + journey.getDestination() + "</td>");
                     out.print("<td>" + journey.getDistance() + "</td>");
-                    out.print("<td>" + journey.getCost() + "</td>");
+                    out.print(String.format("<td>£%.2f</td>", journey.getCost()));
                     out.print("</tr>");
                     
                     total += journey.getCost();
                 }
                 
+                out.print("</table>");
                 // print number of journeys and total turnover below journey table
-                out.print("Number of journeys served: " + journeyList.size());
-                out.print("Total Turnover: " + total);
+                out.print("<br>Number of journeys served: " + journeyList.size());
+                out.print("<br>Total Turnover: £" + total);
+                } else {
+                    out.print("<br>No journeys found for " + stringDate);
+                }
             %>
+            </form>
     </body>
 </html>
