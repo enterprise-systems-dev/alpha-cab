@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -335,6 +336,11 @@ public class UserDao {
                 }
                                 
                 Driver u = new Driver(rs.getInt(1), rs.getString(2), rs.getString(3), rSet.getString(3), rSet.getString(2));
+                
+                if (rSet.getString(5) != null) {
+                    u.setBusy(true);
+                }
+                
                 driverList.add(u);
             }
         }
@@ -447,12 +453,11 @@ public class UserDao {
         availableDrivers = getAllDrivers();
         
         // Remove busy drivers
-        for (Driver d : availableDrivers) {
+        // Use the Iterator class to avoid java.util.ConcurrentModificationException
+        for (Iterator<Driver> it = availableDrivers.iterator(); it.hasNext();) {
+            Driver d = it.next();
             if (d.isBusy()) {
-                
-                // Create a list that only contains d and remove all instances of it
-                // From availableDrivers
-                availableDrivers.removeAll(Collections.singletonList(d));
+                it.remove();
             }
         }
         
@@ -482,29 +487,27 @@ public class UserDao {
     
     public boolean assignJobToDriver(int driverID, int jobID) {
         
-        List<Driver> tempDriverList = getAllDrivers();
-        Driver driver = null;
+        String updateDriver = "UPDATE DRIVERS SET STATUS = ? WHERE USERID = ?";
+        String updateDemand = "UPDATE DEMANDS SET STATUS = ? WHERE ID = ?";
         
-        for (Driver d : tempDriverList) {
-            // Driver found!
-            if(d.getId() == driverID){
-                driver = d;
-                break;
-            }
-        }
-        
-        // if driver was found give him the job
-        if (driver != null) {
-            driver.setBusy(true);
-            driver.setCustomerID(jobID);
+        try {
+            PreparedStatement driverPS = con.prepareStatement(updateDriver);
+            PreparedStatement demandPS = con.prepareStatement(updateDemand);
             
-            //remove demand
+            driverPS.setString(1, "Job id " + jobID);
+            driverPS.setInt(2, driverID);
             
-            return true;
+            demandPS.setString(1, "In progress");
+            demandPS.setInt(2, jobID);
             
-        } else {
+            driverPS.executeUpdate();
+            demandPS.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
             return false;
         }
+        return true;
     }
 }
     
