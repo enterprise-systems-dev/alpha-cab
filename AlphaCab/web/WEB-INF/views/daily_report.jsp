@@ -16,12 +16,16 @@
         <title>Daily Report</title>
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
         <h1>Daily Report by Date</h1>
         <form method="post" action="DailyReport">
         <input type="text" name="date-textbox" placeholder="yyyy-mm-dd"><br><br>
-        <input type="submit" name="get-bookings-button" value="Get Bookings">
-
-        <jsp:include page="header.jsp"/>
+        <input type="submit" name="get-bookings-button" value="Get Bookings"><br>
+        <%
+            if (request.getAttribute("error") != null) {
+                out.print(request.getAttribute("error"));
+            }
+        %>
         <h1>Daily Report for 
             <%
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

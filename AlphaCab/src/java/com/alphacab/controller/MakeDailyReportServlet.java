@@ -7,7 +7,6 @@ package com.alphacab.controller;
 
 import com.alphacab.model.UserDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -51,20 +50,20 @@ public class MakeDailyReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-                //create db access obj
+
+        //create db access obj
         UserDao UserDao = new UserDao();
-        
-        UserDao.connect((Connection)request.getServletContext().getAttribute("connection"));
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");     
+
+        UserDao.connect((Connection) request.getServletContext().getAttribute("connection"));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         String stringDate = sdf.format(Calendar.getInstance().getTime());
         Date date = new Date();
         request.setAttribute("journeyList", UserDao.getTodaysJourneys(date));
         request.setAttribute("date", date);
-        
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/daily_report.jsp");    
+
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/daily_report.jsp");
         view.forward(request, response);
     }
 
@@ -79,36 +78,37 @@ public class MakeDailyReportServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         //create db access obj
         UserDao UserDao = new UserDao();
-        
-        UserDao.connect((Connection)request.getServletContext().getAttribute("connection"));
-        
+
+        UserDao.connect((Connection) request.getServletContext().getAttribute("connection"));
+
         String stringDate = request.getParameter("date-textbox");
-        
+
         Date date = new Date();
-        
-        if(!stringDate.isEmpty()) {
+
+        if (!stringDate.isEmpty()) {
             try {
+
                 // needs checks to make sure date month and days entered are valid
                 date = new SimpleDateFormat("yyyy-MM-dd").parse(stringDate);
-                
+
                 // if date is in the future, set the date to today
-                if(date.after(new Date())) {
+                if (date.after(new Date())) {
                     date = new Date();
                 }
             } catch (ParseException ex) {
+                request.setAttribute("error", "Invalid date format. Please user yyyy-mm-dd");
                 Logger.getLogger(MakeDailyReportServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
-        
         request.setAttribute("journeyList", UserDao.getTodaysJourneys(date));
         request.setAttribute("date", date);
-        
+
         RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/daily_report.jsp");
-             
+
         view.forward(request, response);
     }
 
