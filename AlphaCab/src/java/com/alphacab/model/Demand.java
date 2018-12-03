@@ -5,9 +5,12 @@
  */
 package com.alphacab.model;
 
+import java.sql.Date;
+import java.sql.Time;
+
 /**
  *
- * @author marcus
+ * @author marcus, Trym
  */
 public class Demand {
 
@@ -15,12 +18,12 @@ public class Demand {
     private final String name;
     private final String address;
     private final String destination;
-    private final String date;
-    private final String time;
+    private final Date date;
+    private final Time time;
     private final String status;
     private final int customerid;
 
-    Demand(int id, String name, String address, String destination, String date, String time, String status, int customerid) {
+    Demand(int id, String name, String address, String destination, Date date, Time time, String status, int customerid) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -31,6 +34,11 @@ public class Demand {
         this.customerid = customerid;
     }
 
+    public Journey makeJourney(Driver driver, double distance, double cost){
+        Journey journey = new Journey(this, driver, distance, cost);
+        return journey;
+    }
+    
     public int getId() {
         return id;
     }
@@ -47,11 +55,11 @@ public class Demand {
         return destination;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
 

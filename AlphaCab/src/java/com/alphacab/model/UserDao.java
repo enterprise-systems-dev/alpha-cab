@@ -397,7 +397,8 @@ public class UserDao {
             ResultSet rSet = ps.executeQuery();
             
             while (rSet.next()) {
-                tempDemand = new Demand(rSet.getInt(1), rSet.getString(2), rSet.getString(3), rSet.getString(4), rSet.getString(5), rSet.getString(6), rSet.getString(7), rSet.getInt(8));
+                
+                tempDemand = new Demand(rSet.getInt(1), rSet.getString(2), rSet.getString(3), rSet.getString(4), rSet.getDate(5), rSet.getTime(6), rSet.getString(7), rSet.getInt(8));
                 
                 demands.add(tempDemand);
                 
@@ -430,8 +431,16 @@ public class UserDao {
             ResultSet rSet = ps.executeQuery();
             
             while (rSet.next()) {
+                /*
+                *
+                * THIS NEEDS TO BE FIXED
+                * From the Journey table, get the required information from the Driver
+                * Use data to initialise Driver driver = new Driver(); properly
+                *
+                */
                 
-                tempJourney = new Journey(rSet.getString(2), rSet.getString(3), rSet.getInt(4), rSet.getString(5), rSet.getInt(6), rSet.getString(7), rSet.getInt(8), rSet.getDate(9), rSet.getTime(10));
+                Driver driver = null;
+                tempJourney = new Journey(rSet.getString(2), rSet.getString(3), rSet.getInt(4), rSet.getString(5), rSet.getInt(6), rSet.getFloat(7), rSet.getDate(8), rSet.getTime(9), driver);
                 
                 journeyList.add(tempJourney);
             }
