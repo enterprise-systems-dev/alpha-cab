@@ -5,11 +5,10 @@
  */
 package com.alphacab.controller;
 
-import com.alphacab.model.User;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Darren
+ * @author marcus
  */
-public class RemoveUserServlet extends HttpServlet {
+public class SetRatesServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -33,7 +33,6 @@ public class RemoveUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -46,21 +45,21 @@ public class RemoveUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.print("0-------------------------------------------------------");
-        
-        //create db access obj
+
         UserDao userDao = new UserDao();
-        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
-        
-        //add user list to request
-        List<User> userList = userDao.getAllUsers();
-        request.setAttribute("userList",userList);
-        
-        System.out.print("01------------------------------------------------------");
-        
-        //view - remove user
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/remove_user.jsp");
+
+        userDao.connect((Connection) request.getServletContext().getAttribute("connection"));
+
+        String[] rates;
+
+        rates = userDao.getBaseRateAndRatePerMile();
+
+        if (rates != null) {
+            request.setAttribute("base-rate", rates[0]);
+            request.setAttribute("rate-per-mile", rates[1]);
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/index.jsp");
         view.forward(request, response);
     }
 
@@ -76,29 +75,8 @@ public class RemoveUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //create db access obj
-        UserDao userDao = new UserDao();
-        userDao.connect((Connection)request.getServletContext().getAttribute("connection"));
+        // Get values from jsp and update database
 
-        //get id of user to delete
-        int userID = Integer.parseInt(request.getParameter("userID"));
-        
-        //remove user
-        boolean successful = userDao.removeUser(userID);
-        
-        //add user list to request
-        List<User> userList = userDao.getAllUsers();
-        request.setAttribute("userList",userList);
-        
-        //set request params on success and forward to add_user.jsp
-        if(successful == true)
-            request.setAttribute("message", "user removed");
-        else
-            request.setAttribute("error", "Error removing user");
-        
-        //view - remove user
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/remove_user.jsp");
-        view.forward(request, response);
     }
 
     /**

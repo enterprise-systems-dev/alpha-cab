@@ -540,5 +540,31 @@ public class UserDao {
         }
         return true;
     }
+    
+    public String[] getBaseRateAndRatePerMile() {
+        
+        String rateQuery = "SELECT * FROM RATES";
+        
+        String[] ret = null;
+        
+        try {
+            PreparedStatement basePS = con.prepareStatement(rateQuery);
+            
+            ResultSet rSet = basePS.executeQuery();
+            
+            if (rSet.next()) {
+                
+                ret[0] = rSet.getString(1);
+                ret[1] = rSet.getString(2);
+                
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        return ret;
+        
+    }
 }
     
