@@ -31,8 +31,11 @@
                     
                     <input class="btn btn-primary float-right" name="login-button" type="submit" value="Login"/><br><br>
                     <%
-                        if(request.getAttribute("error") != null) {
+                        if(request.getAttribute("error") != null) {                            
+                            out.print("<div class=\"alert alert-info alert-dismissible\">");
+                            out.print("<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>");
                             out.print(request.getAttribute("error"));
+                            out.print("</div>");
                         }
                     %>
                 </form>
