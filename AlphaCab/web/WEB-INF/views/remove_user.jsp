@@ -19,16 +19,35 @@
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        <h1>Welcome to the remove user page</h1>
-        User List<br>
-        <table style="width:100%">
-            <tr>
-                <th>userID</th>
-                <th>Username</th>
-                <th>Role</th>
-            </tr>
+        <div class="container">
+        <h1 class="text-center display-4">Welcome to the remove user page</h1>
+        <% ArrayList<User> userList = (ArrayList)request.getAttribute("userList");
+            out.print("<div class=\"text-center\">" + userList.size() + " users found </div><br>");
+        %>
+        
+        <form method="post" action="RemoveUser">
+            <label for="userID">Select User to Remove</label>
+            <div class="form-group">         
+                <select class="custom-select form-control col-md-9" name="userID" id="userID">
+                    <%
+                        for(User u : userList)
+                            out.print("<option value=" +u.getId()+ ">" +u.getId()+ "</option>");
+                    %>
+                </select>
+ 
+                    <button class="btn btn-danger float-right col-md-2" type="submit" value="Remove User">Remove User</button>
+ 
+            </div>
+        </form>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>userID</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
             <%
-                ArrayList<User> userList = (ArrayList)request.getAttribute("userList");
                 for(User u : userList){
                     out.print("<tr>");
                     out.print("<td>" + u.getId() + "</td>");
@@ -38,20 +57,7 @@
                 }
             %>
         </table>
-        <form method="post" action="RemoveUser">
-            <br>Select ID<br>
-            <select name="userID">
-                <%
-                    for(User u : userList)
-                        out.print("<option value=" +u.getId()+ ">" +u.getId()+ "</option>");
-                %>
-            </select>
-            <input type="submit" value="Remove User">
-        </form>
-        <br><br>
-        <a href="AddUser">Add User</a><br>
-        <a href="Logout">Log out</a>
-        <br><br>
+        
         <%
             if(request.getAttribute("error") != null) {
                 out.print(request.getAttribute("error"));
@@ -60,6 +66,7 @@
                 out.print(request.getAttribute("message"));
             }
         %>
+        </div>
         <jsp:include page="/resources/js/cdn_js.jsp"/>
     </body>
 </html>

@@ -14,12 +14,14 @@
         <title>Home</title>
     </head>
     <body>
+        <jsp:include page="/WEB-INF/views/header.jsp"/>
         <div class="container">
-            <jsp:include page="/WEB-INF/views/header.jsp"/>
-            <h1>WELCOME TO THE HOME PAGE!</h1>
-            <%  User sessionUser = (User) session.getAttribute("user");
-                out.print(String.format("Hello %s, your user type is %s and id is %d",
-                        sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%><br><br>
+            <h1 class="text-center display-4">Welcome to the Home Page!</h1>
+            <%  User sessionUser = (User) session.getAttribute("user");%>
+            <div class="alert alert-success text-center col-md-6 offset-md-3" role="alert">
+                <%out.print(String.format("Hello %s, your user type is %s and id is %d",
+                        sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%>
+            </div>
 
             <%
                 if (sessionUser.getRole().equalsIgnoreCase("customer")) {
