@@ -5,11 +5,6 @@
  */
 package com.alphacab.model;
 
-import java.sql.PreparedStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  *
  * @author Trym
@@ -17,7 +12,7 @@ import java.sql.SQLException;
 public class Admin extends User {
     
     private String name;
-    private String swagFactor; //EXTREMELY VITAL PARAMTER - DO NOT REMOVE 
+    private String swagFactor; //EXTREMELY VITAL PARAMTER - DO NOT REMOVE
     
     private static String ROLE = "admin";
     
