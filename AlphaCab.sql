@@ -92,7 +92,7 @@ CREATE TABLE Journey (
   Address varchar(60),
   customerid int NOT NULL,
   Destination varchar(60),
-  Distance integer NOT NULL DEFAULT 1,
+  Distance double NOT NULL DEFAULT 1.0,
   Registration varchar(10) NOT NULL,
   Cost float,
   Date date NOT NULL,
@@ -109,3 +109,16 @@ INSERT INTO Journey (Name, Address, Destination, Distance, customerid, Registrat
 ('Jim Hunter', '765 High Road, London, N12', '120 Green Lanes, London, N13', 7, 7, 'AK52VZV', '2015-10-15', '06:00:00'),
 ('Jim Hunter', '765 High Road, London, N12', '131 Stoke Newington High Road, London, N12', 8, 7, 'AK52VZV', '2015-10-15', '12:00:00'),
 ('Eva Smith', 'Finchley, London', 'Luton Airport, Luton', 30, 4, 'R34AKP', '2015-10-22', '10:00:00');
+
+-- --------------------------------------------------------
+
+--DROP Table Rates;
+CREATE TABLE Rates (
+  id int NOT NULL GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
+  Base_Rate double NOT NULL DEFAULT 10.0,
+  Rate_per_mile double NOT NULL DEFAULT 1.0,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO Rates (Base_Rate, Rate_per_mile) VALUES
+(10.0, 1.0);
