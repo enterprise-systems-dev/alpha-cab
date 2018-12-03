@@ -34,7 +34,6 @@ public class SetRatesServlet extends HttpServlet {
             throws ServletException, IOException {
     }
 
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -46,21 +45,21 @@ public class SetRatesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         UserDao userDao = new UserDao();
-        
+
         userDao.connect((Connection) request.getServletContext().getAttribute("connection"));
-        
+
         String[] rates;
-        
-       rates = userDao.getBaseRateAndRatePerMile();
-       
-       if (rates != null) {
-           request.setAttribute("base-rate", rates[0]);
+
+        rates = userDao.getBaseRateAndRatePerMile();
+
+        if (rates != null) {
+            request.setAttribute("base-rate", rates[0]);
             request.setAttribute("rate-per-mile", rates[1]);
-       }
-       
-       RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/index.jsp");
+        }
+
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/index.jsp");
         view.forward(request, response);
     }
 
@@ -76,6 +75,8 @@ public class SetRatesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        // Get values from jsp and update database
+
     }
 
     /**
