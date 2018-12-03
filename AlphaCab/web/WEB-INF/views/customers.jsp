@@ -12,30 +12,33 @@
     <head>
         <jsp:include page="/resources/css/cdn_css.jsp"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Customers Page</title>
+        <title>Customers</title>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        <h1>Welcome to the Customers page</h1>
-        Customer List<br>
-        <form method="post">
-        <table style="width:100%">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Address</th>
-            </tr>
+        <div class="container">
+        <h1 class="text-center">Customers</h1>
+        <%  ArrayList<Customer> customerList = (ArrayList)request.getAttribute("customerList");
+            out.print("<div class=\"text-center\">" + customerList.size() + " customers found </div><br>");
+        %>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                </tr>
+            </thead>
         <%
-            ArrayList<Customer> customerList = (ArrayList)request.getAttribute("customerList");
+            
             for(Customer customer : customerList) {
                 out.print("<tr>");
-                out.print("<td>" + customer.getId() + "</td>");
                 out.print("<td>" + customer.getName() + "</td>");
                 out.print("<td>" + customer.getAddress()+ "</td>");
                 out.print("</tr>");
             }
         %>
-        </form>
+        </table>
+        </div>
     <jsp:include page="/resources/js/cdn_js.jsp"/>
     </body>
 </html>

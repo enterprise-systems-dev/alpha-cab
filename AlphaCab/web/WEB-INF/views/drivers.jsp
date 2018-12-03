@@ -12,30 +12,32 @@
     <head>
         <jsp:include page="/resources/css/cdn_css.jsp"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Drivers Page</title>
+        <title>Drivers</title>
     </head>
     <body>
         <jsp:include page="header.jsp"/>
-        <h1>Welcome to the Drivers page</h1>
-        Driver List<br>
-        <form method="post">
-        <table style="width:100%">
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Registration</th>
-            </tr>
+        <div class="container">
+        <h1 class="text-center">Drivers</h1>
+        <%  ArrayList<Driver> driverList = (ArrayList)request.getAttribute("driverList");
+            out.print("<div class=\"text-center\">" + driverList.size() + " drivers found </div><br>");
+        %>
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                  <th>Name</th>
+                  <th>Registration</th>
+                </tr>
+            </thead>
         <%
-            ArrayList<Driver> driverList = (ArrayList)request.getAttribute("driverList");
             for(Driver driver : driverList) {
                 out.print("<tr>");
-                out.print("<td>" + driver.getId() + "</td>");
                 out.print("<td>" + driver.getName() + "</td>");
                 out.print("<td>" + driver.getRegistration() + "</td>");
                 out.print("</tr>");
             }
         %>
-        </form>
+        </table>
+        </div>
         <jsp:include page="/resources/js/cdn_js.jsp"/>
     </body>
 </html>
