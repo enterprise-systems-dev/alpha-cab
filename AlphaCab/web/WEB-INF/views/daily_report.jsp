@@ -66,7 +66,7 @@
                 for(Journey journey : journeyList) {
                     out.print("<tr>");
                     out.print("<td>" + journey.getName() + "</td>");
-                    out.print("<td>" + journey.getRegistration() + "</td>");
+                    out.print("<td>" + journey.getDriver().getRegistration() + "</td>");
                     out.print("<td>" + journey.getAddress() + "</td>");
                     out.print("<td>" + journey.getDestination() + "</td>");
                     out.print("<td>" + journey.getDistance() + "</td>");
