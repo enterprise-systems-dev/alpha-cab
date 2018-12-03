@@ -12,6 +12,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:include page="/resources/css/cdn_css.jsp"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>History</title>
     </head>
@@ -50,5 +51,6 @@
             }
         %>
         </form>
+        <jsp:include page="/resources/js/cdn_js.jsp"/>
     </body>
 </html>

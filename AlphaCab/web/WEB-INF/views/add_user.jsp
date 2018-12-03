@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:include page="/resources/css/cdn_css.jsp"/>
         <link rel="stylesheet" type="text/css" href="resources/css/main.css"/>
         <script type="text/javascript">
             function displayRoleInputs(value){
@@ -87,5 +88,6 @@
                     out.print(request.getAttribute("message"));
                 }
             %>
+        <jsp:include page="/resources/js/cdn_js.jsp"/>
     </body>
 </html>
