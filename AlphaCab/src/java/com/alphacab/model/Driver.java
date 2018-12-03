@@ -19,7 +19,7 @@ public class Driver extends User {
     private int customerID;
     
     private static String ROLE = "driver";
-    
+       
     public Driver(String username, String password){
         super(0, username, password);
     }

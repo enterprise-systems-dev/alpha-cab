@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -431,16 +433,10 @@ public class UserDao {
             ResultSet rSet = ps.executeQuery();
             
             while (rSet.next()) {
-                /*
-                *
-                * THIS NEEDS TO BE FIXED
-                * From the Journey table, get the required information from the Driver
-                * Use data to initialise Driver driver = new Driver(); properly
-                *
-                */
                 
-                Driver driver = null;
-                tempJourney = new Journey(rSet.getString(2), rSet.getString(3), rSet.getInt(4), rSet.getString(5), rSet.getInt(6), rSet.getFloat(7), rSet.getDate(8), rSet.getTime(9), driver);
+                String registration = rSet.getString(7);
+                
+                tempJourney = new Journey(rSet.getString(2), rSet.getString(3), rSet.getInt(4), rSet.getString(5), rSet.getDouble(6), rSet.getDouble(8), rSet.getDate(9), rSet.getTime(10), getDriverByRegistration(registration));
                 
                 journeyList.add(tempJourney);
             }
@@ -448,10 +444,36 @@ public class UserDao {
         } catch (SQLException e) {
             System.out.println("Failed to get journey - SQLException:" + e);
         }
-        
-        
+               
         return journeyList;
+    }
+    
+    public Driver getDriverByRegistration(String registration) {
         
+        Driver driver = new Driver(0, "", "");
+        
+        String s = "SELECT * FROM Driver WHERE Registration = ?";
+        
+        PreparedStatement ps;
+        
+        try {
+            ps = con.prepareStatement(s);
+            ps.setString(1, registration);
+            ResultSet rSet = ps.executeQuery();
+            
+            while (rSet.next()) {
+                driver.setId(rSet.getInt(1));
+                driver.setName(rSet.getString(2));
+                driver.setBusy(true);
+                driver.setRegistration(registration);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+
+        return driver;
     }
     
     public List<Driver> getAvailableDrivers() {
