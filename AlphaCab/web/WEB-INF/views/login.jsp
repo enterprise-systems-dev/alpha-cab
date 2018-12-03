@@ -15,7 +15,7 @@
     <body>
         <div class="container col-md-6">
             <div class="jumbotron">
-            <h1 class="text-center display-4">Welcome to Noober!</h1>
+            <h1 class="text-center display-4">Welcome to AlphaCab!</h1>
             </div>
             <div class="col-md-6 offset-md-3">
                 <form method="post" name="login-form" action="Login">
@@ -41,9 +41,9 @@
                 <br>
                 
                 <form class="text-center" method="post" name="guest-login-form" action="Login">
-                    <label for="guest-login"><small>Don`t want to register but still need a Noober?</small></label>
+                    <label for="guest-login"><small>Don`t want to register but still need an AlphaCab?</small></label>
                     <input type="hidden" name="guest-form" value="guest-login-form">
-                    <button type="submit" class="btn btn-sm btn-light" name="guest-login" id="guest-login"><small>Get an emergency Noober</small></button>
+                    <button type="submit" class="btn btn-sm btn-light" name="guest-login" id="guest-login"><small>Get an emergency AlphaCab</small></button>
                 </form>
             </div>
         </div>

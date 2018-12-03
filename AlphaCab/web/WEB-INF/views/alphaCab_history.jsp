@@ -1,5 +1,5 @@
 <%-- 
-    Document   : noober_history
+    Document   : alphaCab_history
     Created on : 01-Dec-2018, 16:16:29
     Author     : marcus
 --%>
@@ -18,7 +18,7 @@
     </head>
     <body>
         <jsp:include page="/WEB-INF/views/header.jsp"/>
-        <h1>Showing Noober history for:</h1>
+        <h1>Showing AlphaCab history for:</h1>
         <%
             User sessionUser = (User) session.getAttribute("user");
             out.print(String.format("%s, your user type is %s and id is %d",

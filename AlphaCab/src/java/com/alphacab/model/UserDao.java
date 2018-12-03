@@ -5,7 +5,6 @@
  */
 package com.alphacab.model;
 
-import testing.MyShit;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -14,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 

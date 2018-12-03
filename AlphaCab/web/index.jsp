@@ -26,23 +26,23 @@
             <%
                 if (sessionUser.getRole().equalsIgnoreCase("customer")) {
             %>
-            <form method="post" action="CallNoober">
+            <form method="post" action="CallAlphaCab">
                 Where are you?
                 <input type="text" name="address-textbox" placeholder="Your current address"><br>
                 Where do you want to go?
                 <input type="text" name="destination-textbox" placeholder="Your destination address"><br>
-                When do you need the Noober?<br>
+                When do you need the cab?<br>
                 <input type="text" name="pickup-date" placeholder="yyyy-mm-dd">
                 <input type="text" name="pickup-time" placeholder="hh:mm:ss - 24h format">
                 <%-- try this for date and time https://jqueryui.com/datepicker/ 
                      make sure date and time are in specified format 
                      thats how the database wants it.
                 --%>
-                <input type="submit" name="call-noober-button" value="Call Noober">
+                <input type="submit" name="call-AlphaCab-button" value="Call AlphaCab">
             </form>
 
-                <form method="get" action="CallNoober">
-                    <input type="submit" name="view-noober-history-button" value="Noober History">
+                <form method="get" action="CallAlphaCab">
+                    <input type="submit" name="view-AlphaCab-history-button" value="AlphaCab History">
                 </form>
             <%}%>
             <%

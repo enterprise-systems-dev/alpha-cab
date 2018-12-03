@@ -61,8 +61,8 @@
         <jsp-file>index.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>CallNooberServlet</servlet-name>
-        <servlet-class>com.alphacab.controller.CallNooberServlet</servlet-class>
+        <servlet-name>CallAlphaCabServlet</servlet-name>
+        <servlet-class>com.alphacab.controller.CallAlphaCabServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>GuestLoginServlet</servlet-name>
@@ -112,12 +112,12 @@
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CallNooberServlet</servlet-name>
-        <url-pattern>/CallNoober</url-pattern>
+        <servlet-name>CallAlphaCabServlet</servlet-name>
+        <url-pattern>/CallAlphaCab</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CallNooberServlet</servlet-name>
-        <url-pattern>/NooberHistory</url-pattern>
+        <servlet-name>CallAlphaCabServlet</servlet-name>
+        <url-pattern>/AlphaCabHistory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GuestLoginServlet</servlet-name>
