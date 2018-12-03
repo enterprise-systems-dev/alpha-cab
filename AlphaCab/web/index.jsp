@@ -22,15 +22,6 @@
                         sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%><br><br>
 
             <%
-                if (sessionUser.getRole().equalsIgnoreCase("admin")) {
-            %>
-            <a href="AddUser">Add User</a><br>
-            <a href="RemoveUser">Remove User</a><br>
-            <a href="DailyReport">Daily Report</a><br>
-            <a href="AssignJobs">Assign Jobs</a><br>
-            <%}%>
-
-            <%
                 if (sessionUser.getRole().equalsIgnoreCase("customer")) {
             %>
             <form method="post" action="CallNoober">
@@ -52,8 +43,6 @@
                     <input type="submit" name="view-noober-history-button" value="Noober History">
                 </form>
             <%}%>
-            <a href="Logout">Log out</a>
-
             <%
                 if (request.getAttribute("error") != null) {
                     out.print(request.getAttribute("error"));
