@@ -5,8 +5,6 @@
  */
 package com.alphacab.model;
 
-import java.sql.Connection;
-
 /**
  *
  * @author Trym

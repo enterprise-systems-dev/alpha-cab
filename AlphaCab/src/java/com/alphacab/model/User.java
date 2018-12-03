@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.alphacab.model;
-import java.sql.Connection;
 
 /**
  *

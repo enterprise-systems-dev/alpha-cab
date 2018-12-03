@@ -8,7 +8,6 @@ package com.alphacab.controller;
 import com.alphacab.model.Customer;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author marcus
  */
-public class CallNooberServlet extends HttpServlet {
+public class CallAlphaCabServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,7 +70,7 @@ public class CallNooberServlet extends HttpServlet {
             
         }
         
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/noober_history.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/alphaCab_history.jsp");
         view.forward(request, response);
         
     }
@@ -88,7 +87,7 @@ public class CallNooberServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Add demand = call Noober
+        // Add demand = call AlphaCab
         
         String startAddress = request.getParameter("address-textbox");
         String endAddress = request.getParameter("destination-textbox");
@@ -117,11 +116,11 @@ public class CallNooberServlet extends HttpServlet {
             demandAdded = customerDao.addDemand(logedInCustomer.getName(), startAddress, endAddress, pickupDate, pickupTime, logedInCustomer.getId());
             
             if (demandAdded) {
-                request.setAttribute("message", "Your Noober has been notified!");
+                request.setAttribute("message", "Your AlphaCab has been notified!");
                 
             } else {
                 System.out.println("Someting went wrong when adding demand !!!!!!!!!!!!!!!!!");
-                request.setAttribute("error", "Could not call a Noober.");
+                request.setAttribute("error", "Could not call a AlphaCab.");
             }
             
         }

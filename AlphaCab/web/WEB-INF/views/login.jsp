@@ -43,7 +43,7 @@
                 <form class="text-center" method="post" name="guest-login-form" action="Login">
                     <label for="guest-login"><small>Don`t want to register but still need an AlphaCab?</small></label>
                     <input type="hidden" name="guest-form" value="guest-login-form">
-                    <button type="submit" class="btn btn-sm btn-light" name="guest-login" id="guest-login"><small>Get an emergency Noober</small></button>
+                    <button type="submit" class="btn btn-sm btn-light" name="guest-login" id="guest-login"><small>Get an emergency AlphaCab</small></button>
                 </form>
             </div>
         </div>
