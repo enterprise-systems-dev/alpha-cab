@@ -21,7 +21,7 @@
             <div class="alert alert-success text-center col-md-6 offset-md-3" role="alert">
                 <%out.print(String.format("Hello %s, your user type is %s and id is %d",
                             sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%>
-            </div>      
+            </div>  
             <%
                 if (sessionUser.getRole().equalsIgnoreCase("customer")) {
             %>

@@ -50,6 +50,13 @@
                 </div>
             </li>
             <%}%>
+            <%
+                if (sessionUser.getRole().equalsIgnoreCase("driver")) {
+            %>
+            <li class="nav-item active">
+                <a class="nav-link" href="MyJobs">My Jobs<span class="sr-only">(current)</span></a>
+            </li>
+            <%}%>
             <li class="nav-item">
                 <a class="nav-link" href="Logout">Log Out<span class="sr-only">(current)</span></a>
             </li>
