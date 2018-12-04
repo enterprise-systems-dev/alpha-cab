@@ -323,14 +323,15 @@ public class UserDao {
                 ps.setInt(1, rs.getInt(1));
 
                 ResultSet rSet = ps.executeQuery();
+                while(rSet.next()) {
+                    Driver u = new Driver(rs.getInt(1), rs.getString(2), rs.getString(3), rSet.getString(2), rSet.getString(3));
 
-                Driver u = new Driver(rs.getInt(1), rs.getString(2), rs.getString(3), rSet.getString(3), rSet.getString(2));
+                    if (rSet.getString(5) != null) {
+                        u.setBusy(true);
+                    }
 
-                if (rSet.getString(5) != null) {
-                    u.setBusy(true);
+                    driverList.add(u);
                 }
-
-                driverList.add(u);
             }
         } catch (SQLException e) {
             System.out.println("Failed to get driver list - SQLException:" + e);
