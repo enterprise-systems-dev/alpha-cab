@@ -539,11 +539,11 @@ public class UserDao {
         return true;
     }
     
-    public String[] getBaseRateAndRatePerMile() {
+    public double[] getBaseRateAndRatePerMile() {
         
         String rateQuery = "SELECT * FROM RATES";
         
-        String[] ret = null;
+        double[] ret = new double[2];
         
         try {
             PreparedStatement basePS = con.prepareStatement(rateQuery);
@@ -552,8 +552,8 @@ public class UserDao {
             
             if (rSet.next()) {
                 
-                ret[0] = rSet.getString(1);
-                ret[1] = rSet.getString(2);
+                ret[0] = rSet.getDouble(2);
+                ret[1] = rSet.getDouble(3);
                 
             }
             

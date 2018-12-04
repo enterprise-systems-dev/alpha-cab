@@ -20,9 +20,8 @@
             <%  User sessionUser = (User) session.getAttribute("user");%>
             <div class="alert alert-success text-center col-md-6 offset-md-3" role="alert">
                 <%out.print(String.format("Hello %s, your user type is %s and id is %d",
-                        sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%>
-            </div>
-
+                            sessionUser.getUsername(), sessionUser.getRole(), sessionUser.getId()));%>
+            </div>      
             <%
                 if (sessionUser.getRole().equalsIgnoreCase("customer")) {
             %>
@@ -41,9 +40,9 @@
                 <input type="submit" name="call-AlphaCab-button" value="Call AlphaCab">
             </form>
 
-                <form method="get" action="CallAlphaCab">
-                    <input type="submit" name="view-AlphaCab-history-button" value="AlphaCab History">
-                </form>
+            <form method="get" action="CallAlphaCab">
+                <input type="submit" name="view-AlphaCab-history-button" value="AlphaCab History">
+            </form>
             <%}%>
             <%
                 if (request.getAttribute("error") != null) {

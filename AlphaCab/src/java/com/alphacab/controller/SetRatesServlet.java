@@ -49,7 +49,7 @@ public class SetRatesServlet extends HttpServlet {
 
         userDao.connect((Connection) request.getServletContext().getAttribute("connection"));
 
-        String[] rates;
+        double[] rates;
 
         rates = userDao.getBaseRateAndRatePerMile();
 
@@ -58,7 +58,7 @@ public class SetRatesServlet extends HttpServlet {
             request.setAttribute("rate-per-mile", rates[1]);
         }
 
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/index.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/set_rates.jsp");
         view.forward(request, response);
     }
 
