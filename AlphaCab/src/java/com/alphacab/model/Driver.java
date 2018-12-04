@@ -26,7 +26,7 @@ public class Driver extends User {
         this.name = "";
         this.registration = "";
     } //Default constructor
-    public Driver(int id, String username, String password, String name, String registration) {
+    public Driver(int id, String username, String password, String registration, String name) {
         super(id, username, password);
         this.name = name;
         this.registration = registration;
