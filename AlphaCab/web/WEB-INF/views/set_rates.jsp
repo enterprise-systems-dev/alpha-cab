@@ -15,7 +15,7 @@
     <body>
         <jsp:include page="/WEB-INF/views/header.jsp"/>
         <div class="container">
-            <h1 clas="text-center display-4">Set Rates</h1>
+            <h1 class="text-center display-4">Rates</h1>
             <table class="table col-md-6 offset-md-3 text-center">
                 <thead>
                     <tr>
