@@ -22,13 +22,19 @@
             <h1 class="text-center display-4">Daily Report for 
                 <%
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date date = new Date();
-                    out.print(sdf.format(date));
+
+                    if(request.getAttribute("date") != null) {
+                        Date date = (Date)request.getAttribute("date");
+                        out.print(sdf.format(date));
+                    } else {
+                        Date date = new Date();
+                        out.print(sdf.format(date));
+                    }
                 %>
             </h1><br>
             <form method="post" action="DailyReport">
                 <div class="input-group col-md-6 offset-md-3">
-                <input type="text" class="form-control rounded-right" name="date-textbox" placeholder="yyyy-mm-dd"><span class="input-group-btn input-space">
+                <input type="text" class="form-control rounded-right" name="date-textbox" placeholder="yyyy-MM-dd" pattern="^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$"><span class="input-group-btn input-space">
                 <button class="btn btn-primary" type="submit" name="get-bookings-button" value="Get Bookings">Get Bookings</button>
                 </div><br><br>
                 <%

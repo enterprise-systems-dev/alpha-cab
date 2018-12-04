@@ -26,22 +26,30 @@
                 if (sessionUser.getRole().equalsIgnoreCase("customer")) {
             %>
             <form method="post" action="CallAlphaCab">
-                Where are you?
-                <input type="text" name="address-textbox" placeholder="Your current address"><br>
-                Where do you want to go?
-                <input type="text" name="destination-textbox" placeholder="Your destination address"><br>
-                When do you need the cab?<br>
-                <input type="text" name="pickup-date" placeholder="yyyy-mm-dd">
-                <input type="text" name="pickup-time" placeholder="hh:mm:ss - 24h format">
+                <div class="form-group">
+                    <label for="address-textbox">Address</label>
+                    <input type="text" class="form-control" name="address-textbox" id="address-textbox" placeholder="Enter current address">
+                </div>
+                <div class="form-group">
+                    <label for="destination-textbox">Destination</label>
+                    <input type="text" class="form-control" name="destination-textbox" id="destination-textbox" placeholder="Enter destination address">
+                </div>
+                <div class="form-group">
+                    <label for="pickup-date">Date</label>
+                    <input type="text" class="form-control" name="pickup-date" id="pickup-date" placeholder="yyyy-MM-dd" pattern="^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$">
+                </div>
+                <div class="form-group">
+                    <label for="pickup-time">Time</label>
+                    <input type="text" class="form-control" name="pickup-time" id="pickup-time" placeholder="hh:mm:ss - 24h format">
+                </div>
                 <%-- try this for date and time https://jqueryui.com/datepicker/ 
                      make sure date and time are in specified format 
                      thats how the database wants it.
                 --%>
-                <input type="submit" name="call-AlphaCab-button" value="Call AlphaCab">
-            </form>
-
+                <input class="btn btn-success" type="submit" name="call-AlphaCab-button" value="Call AlphaCab">
+            </form><br>
             <form method="get" action="CallAlphaCab">
-                <input type="submit" name="view-AlphaCab-history-button" value="AlphaCab History">
+                <input class="btn btn-info" type="submit" name="view-AlphaCab-history-button" value="AlphaCab History">
             </form>
             <%}%>
             <%
