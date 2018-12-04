@@ -450,7 +450,7 @@ public class UserDao {
         
         Driver driver = new Driver(0, "", "");
         
-        String s = "SELECT * FROM Driver WHERE Registration = ?";
+        String s = "SELECT * FROM Drivers WHERE Registration = ?";
         
         PreparedStatement ps;
         
