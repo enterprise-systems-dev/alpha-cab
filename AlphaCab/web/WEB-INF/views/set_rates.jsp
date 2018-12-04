@@ -44,6 +44,9 @@
                     <input type="text" name="per-mile-textbox" id="per-mile-textbox" class="form-control" aria-label="Amount (to the nearest dollar)">
                 </div>
             </div>
+                <form method="post" name="change-rates-form" action="SetRates">
+                <input  class="btn btn-primary float-right" name="change-rates-button" type="submit" value="SetRates"/>
+                </form>
             <jsp:include page="/resources/js/cdn_js.jsp"/>
     </body>
 </html>

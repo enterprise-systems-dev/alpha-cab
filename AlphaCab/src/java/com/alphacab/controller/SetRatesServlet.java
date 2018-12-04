@@ -7,6 +7,7 @@ package com.alphacab.controller;
 
 import com.alphacab.model.UserDao;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -75,6 +76,38 @@ public class SetRatesServlet extends HttpServlet {
             throws ServletException, IOException {
         
         // Get values from jsp and update database
+        UserDao userDao = new UserDao();
+        
+        userDao.connect((Connection) request.getServletContext().getAttribute("connection"));
+        
+        String newBase;
+        String newPerMile;
+        String message = "";
+        
+        try {
+            newBase = (String) request.getAttribute("base-rate-textbox");
+            newPerMile = (String) request.getAttribute("per-mile-textbox");
+            
+            if (newBase != null) {
+                userDao.setBaseRate(Double.parseDouble(newBase));
+                message += "\nBase rate has been updated!";
+            }
+            
+            if (newPerMile != null) {
+                userDao.setBaseRate(Double.parseDouble(newPerMile));
+                message += "\nRate per mile has been updated!";
+            }
+            
+        } catch (NumberFormatException | NullPointerException e) {
+            System.out.println(e);
+        }
+        
+        request.setAttribute("message", message);
+        
+        doGet(request, response);
+        
+//        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/set_rates.jsp");
+//        view.forward(request, response);
 
     }
 

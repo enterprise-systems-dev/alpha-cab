@@ -323,7 +323,7 @@ public class UserDao {
                 ps.setInt(1, rs.getInt(1));
 
                 ResultSet rSet = ps.executeQuery();
-                while(rSet.next()) {
+                while (rSet.next()) {
                     Driver u = new Driver(rs.getInt(1), rs.getString(2), rs.getString(3), rSet.getString(2), rSet.getString(3));
 
                     if (rSet.getString(5) != null) {
@@ -555,7 +555,7 @@ public class UserDao {
 
     public List<Journey> getJourneysByRegistration(Driver user) {
         List<Journey> journeyList = new ArrayList<>();
-        
+
         try {
             boolean success = query("SELECT * FROM JOURNEY WHERE REGISTRATION = '" + user.getRegistration() + "' ORDER BY DATE, TIME DESC");
 
@@ -570,5 +570,13 @@ public class UserDao {
             System.out.println("SQL Exception: " + e);
         }
         return journeyList;
+    }
+
+    public boolean setBaseRate(double base) {
+        return true;
+    }
+
+    public boolean setPerMile(double perMile) {
+        return true;
     }
 }
