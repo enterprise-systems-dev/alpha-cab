@@ -15,3 +15,7 @@ and open the template in the editor.
 #driver-input {
     display: none;
 }
+
+.input-group-btn.input-space {
+  padding-left: 15px;
+}
