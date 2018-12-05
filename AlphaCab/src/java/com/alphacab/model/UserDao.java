@@ -573,10 +573,33 @@ public class UserDao {
     }
 
     public boolean setBaseRate(double base) {
+        String updateBaseRateQuery = "UPDATE Rates SET base_rate = ? WHERE id = (SELECT id FROM Rates FETCH FIRST ROW ONLY)";
+    
+        PreparedStatement updateBaseRateStatement;
+        try {
+            updateBaseRateStatement = con.prepareStatement(updateBaseRateQuery);
+            updateBaseRateStatement.setDouble(1, base);
+            updateBaseRateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+              
         return true;
     }
 
     public boolean setPerMile(double perMile) {
+        String updatePerMileQuery = "UPDATE Rates SET rate_per_mile = ? WHERE id = (SELECT id FROM Rates FETCH FIRST ROW ONLY)";
+    
+        PreparedStatement updatePerMileStatement;
+        
+        try {
+            updatePerMileStatement = con.prepareStatement(updatePerMileQuery);
+            updatePerMileStatement.setDouble(1, perMile);
+            updatePerMileStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return true;
     }
 }

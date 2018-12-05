@@ -85,8 +85,8 @@ public class SetRatesServlet extends HttpServlet {
         String message = "";
         
         try {
-            newBase = (String) request.getAttribute("base-rate-textbox");
-            newPerMile = (String) request.getAttribute("per-mile-textbox");
+            newBase = (String) request.getParameter("base-rate-textbox");
+            newPerMile = (String) request.getParameter("per-mile-textbox");
             
             if (newBase != null) {
                 userDao.setBaseRate(Double.parseDouble(newBase));
@@ -94,7 +94,7 @@ public class SetRatesServlet extends HttpServlet {
             }
             
             if (newPerMile != null) {
-                userDao.setBaseRate(Double.parseDouble(newPerMile));
+                userDao.setPerMile(Double.parseDouble(newPerMile));
                 message += "\nRate per mile has been updated!";
             }
             

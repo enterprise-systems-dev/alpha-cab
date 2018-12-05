@@ -28,25 +28,25 @@
                     <td><%out.print(request.getAttribute("rate-per-mile"));%></td>
                 </tr>
             </table>
-            <div class="row col-md-6 offset-md-3">
-                <label for="base-rate-textbox">Enter new base rate</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">£</span>
+            <form method="post" name="change-rates-form" action="SetRates">
+                <div class="row col-md-6 offset-md-3">
+                    <label for="base-rate-textbox">Enter new base rate</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">£</span>
+                        </div>
+                        <input type="text" name="base-rate-textbox" id="base-rate-textbox" class="form-control" aria-label="Amount (to the nearest dollar)">
                     </div>
-                    <input type="text" name="base-rate-textbox" id="base-rate-textbox" class="form-control" aria-label="Amount (to the nearest dollar)">
-                </div>
-                <label for="per-mile-textbox">Enter new price per mile</label>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">£</span>
+                    <label for="per-mile-textbox">Enter new price per mile</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">£</span>
+                        </div>
+                        <input type="text" name="per-mile-textbox" id="per-mile-textbox" class="form-control" aria-label="Amount (to the nearest dollar)">
                     </div>
-                    <input type="text" name="per-mile-textbox" id="per-mile-textbox" class="form-control" aria-label="Amount (to the nearest dollar)">
-                </div>
-            </div>
-                <form method="post" name="change-rates-form" action="SetRates">
-                <input  class="btn btn-primary float-right" name="change-rates-button" type="submit" value="SetRates"/>
-                </form>
-            <jsp:include page="/resources/js/cdn_js.jsp"/>
+                    <input class="btn btn-primary float-right" name="change-rates-button" type="submit" value="SetRates"/>
+            </form>
+        </div>
+        <jsp:include page="/resources/js/cdn_js.jsp"/>
     </body>
 </html>
