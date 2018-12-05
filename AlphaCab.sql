@@ -21,6 +21,7 @@ INSERT INTO Users (username, password, role) VALUES('ghikmet', 'ghikmet', 'custo
 INSERT INTO Users (username, password, role) VALUES('jsmith', 'jsmith', 'driver');
 INSERT INTO Users (username, password, role) VALUES('maydin', 'maydin', 'driver');
 INSERT INTO Users (username, password, role) VALUES('mjohnson', 'mjohnson', 'driver');
+INSERT INTO Users (username, password, role) VALUES('ebrown', 'ebrown', 'customer');
 
 -- --------------------------------------------------------
 
@@ -43,7 +44,8 @@ INSERT INTO Customer (Name, Address, userid) VALUES
 ('Jim Hunter', '765 High Road, London, N12', 7),
 ('Phil Johnson', '75 Squires Lane, London, N3', 8),
 ('Saim Soyler', '2 Rosemary Ave, London, N3', 9),
-('Gul Hikmet', '31 Clifton Rd, London, N3 2SG', 10);
+('Gul Hikmet', '31 Clifton Rd, London, N3 2SG', 10),
+('Ed Brown', '3 Cecilia Close, London, N2 0UT', 14);
 
 -- --------------------------------------------------------
 --DROP Table Demands;
