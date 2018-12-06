@@ -116,7 +116,7 @@ public class AddUserServlet extends HttpServlet {
         
         //set request params on success and forward to add_user.jsp
         if(successful == true)
-            request.setAttribute("message", "admin user added");
+            request.setAttribute("message", "user added");
         else
             request.setAttribute("error", "Error adding admin user");
         
