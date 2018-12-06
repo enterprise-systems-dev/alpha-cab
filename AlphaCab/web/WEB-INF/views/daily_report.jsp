@@ -79,7 +79,7 @@
                         out.print("</table>");
                         // print number of journeys and total turnover below journey table
                         out.print("<br>Number of journeys served: " + journeyList.size());
-                        out.print("<br>Total Turnover: £" + total);
+                        out.print(String.format("<br>Total Turnover: £%.2f", total));
                     } else {
                         out.print("No journeys found for " + stringDate);
                     }
