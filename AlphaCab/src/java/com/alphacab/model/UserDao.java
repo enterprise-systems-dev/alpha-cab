@@ -366,6 +366,7 @@ public class UserDao {
 
         } catch (SQLException e) {
             System.out.println("Failed to add new demand - SQLException:" + e);
+            System.out.println("-----------------------");
         }
 
         return false;

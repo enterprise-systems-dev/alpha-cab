@@ -31,12 +31,20 @@
                     <input type="text" class="form-control" name="name-textbox" id="name-textbox" placeholder="Enter name">
                 </div>                
                 <div class="form-group">
-                    <label for="address-textbox">Address</label>
-                    <input type="text" class="form-control" name="address-textbox" id="address-textbox" placeholder="Enter current address">
+                    <label for="addressPostcode-textbox">Address Postcode</label>
+                    <input type="text" class="form-control" name="addressPostcode-textbox" id="addressPostcode-textbox" placeholder="Enter current address postcode">
                 </div>
                 <div class="form-group">
-                    <label for="destination-textbox">Destination</label>
-                    <input type="text" class="form-control" name="destination-textbox" id="destination-textbox" placeholder="Enter destination address">
+                    <label for="addressStreet-textbox">Address Street</label>
+                    <input type="text" class="form-control" name="addressStreet-textbox" id="addressStreet-textbox" placeholder="Enter current address name and street">
+                </div>
+                <div class="form-group">
+                    <label for="destinationPostcode-textbox">Destination Postcode</label>
+                    <input type="text" class="form-control" name="destinationPostcode-textbox" id="destinationPostcode-textbox" placeholder="Enter destination address postcode">
+                </div>
+                <div class="form-group">
+                    <label for="destinationStreet-textbox">Destination Street</label>
+                    <input type="text" class="form-control" name="destinationStreet-textbox" id="destinationStreet-textbox" placeholder="Enter destination address name and street">
                 </div>
                 <div class="form-group">
                     <label for="pickup-date">Date</label>

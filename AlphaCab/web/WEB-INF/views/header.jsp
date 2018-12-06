@@ -40,14 +40,8 @@
             <li class="nav-item active">
                 <a class="nav-link" href="AssignJobs">Assign Job<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Journeys
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">View All</a>
-                    <a class="dropdown-item" href="SetRates">View/Update Rates</a>
-                </div>
+            <li class="nav-item active">
+                <a class="nav-link" href="SetRates">View/Update Rates<span class="sr-only">(current)</span></a>
             </li>
             <%}%>
             <%

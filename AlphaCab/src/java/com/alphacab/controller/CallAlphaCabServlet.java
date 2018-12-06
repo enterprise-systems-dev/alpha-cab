@@ -5,6 +5,7 @@
  */
 package com.alphacab.controller;
 
+import com.alphacab.model.DistanceApi;
 import com.alphacab.model.Customer;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public class CallAlphaCabServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         //create db access obj
         UserDao UserDao = new UserDao();
         UserDao.connect((Connection) request.getServletContext().getAttribute("connection"));
@@ -54,7 +55,7 @@ public class CallAlphaCabServlet extends HttpServlet {
         // Get the current session wthout creating one it it dosent exist
         HttpSession currentSession = request.getSession(false);
 
-        Customer logedInCustomer;
+        Customer loggedInCustomer;
 
         // Check if there is a loged in user
         if (currentSession == null) {
@@ -62,10 +63,10 @@ public class CallAlphaCabServlet extends HttpServlet {
         } else {
 
             // What if user is not a customer, will that ever happen???
-            logedInCustomer = (Customer) currentSession.getAttribute("user");
+            loggedInCustomer = (Customer) currentSession.getAttribute("user");
 
             //add demandList to request
-            request.setAttribute("demandList", UserDao.getDemandsForCustomer(logedInCustomer));
+            request.setAttribute("demandList", UserDao.getDemandsForCustomer(loggedInCustomer));
 
         }
 
@@ -85,13 +86,25 @@ public class CallAlphaCabServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //get parameters for distance function - trim whitespace off ends
+        String addressPostcode = request.getParameter("addressPostcode-textbox").trim();
+        String addressStreet = request.getParameter("addressStreet-textbox").trim();
+        String destinationPostcode = request.getParameter("destinationPostcode-textbox").trim();
+        String destinationStreet = request.getParameter("destinationStreet-textbox").trim();
 
         // Add demand = call AlphaCab
         String name = request.getParameter("name-textbox");
-        String startAddress = request.getParameter("address-textbox");
-        String endAddress = request.getParameter("destination-textbox");
+        String startAddress = addressPostcode+" "+addressStreet;
+        String endAddress = destinationPostcode+" "+destinationStreet;
         String pickupDate = request.getParameter("pickup-date");
         String pickupTime = request.getParameter("pickup-time");
+        
+        //replace whitespace 
+        addressPostcode = addressPostcode.replace(" ","");
+        addressStreet = addressStreet.replace(" ", "%");
+        destinationPostcode = destinationPostcode.replace(" ", "");
+        destinationStreet = destinationStreet.replace(" ", "%");
 
         UserDao customerDao = new UserDao();
 
@@ -113,7 +126,7 @@ public class CallAlphaCabServlet extends HttpServlet {
             customerDao.connect((Connection) request.getServletContext().getAttribute("connection"));
 
             demandAdded = customerDao.addDemand(logedInCustomer.getName(), startAddress, endAddress, pickupDate, pickupTime, logedInCustomer.getId());
-
+            
             if (demandAdded) {
                 request.setAttribute("message", "Your AlphaCab has been notified!");
                 request.setAttribute("name", name);
@@ -131,7 +144,14 @@ public class CallAlphaCabServlet extends HttpServlet {
                 request.setAttribute("rate-per-mile", rates[1]);
                 
                 // calculate costs
-                double distance = 4.0;
+                
+                //instantiate web api class
+                DistanceApi d = new DistanceApi(addressPostcode, addressStreet, destinationPostcode, destinationStreet);
+                //calculate distance
+                d.calculateDistance();
+                //get and set distance
+                double distance = d.getDistance();
+               
                 request.setAttribute("distance", distance);
                 
                 double distanceCost = distance * ratePerMile;
