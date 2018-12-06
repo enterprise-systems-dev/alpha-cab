@@ -5,6 +5,8 @@
  */
 package com.alphacab.controller;
 
+import com.alphacab.model.Demand;
+import com.alphacab.model.Driver;
 import com.alphacab.model.UserDao;
 import java.io.IOException;
 import java.sql.Connection;
@@ -101,6 +103,13 @@ public class AssignJobsServlet extends HttpServlet {
         // if something goes wrong
         if (!userDao.assignJobToDriver(driverID, jobID)) {
             request.setAttribute("error", "Could not assign jod to driver");
+        } else {
+            Driver driver = userDao.getDriverById(driverID);
+
+            Demand demand = userDao.getDemandById(jobID);
+            System.out.println("demand customerid is " + demand.getCustomerid());
+
+            userDao.createJourney(driver, demand);
         }
         
         request.setAttribute("message", "Driver " + driverID + " was assigned job " + jobID);

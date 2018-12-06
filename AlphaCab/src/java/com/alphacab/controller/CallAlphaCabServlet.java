@@ -161,9 +161,6 @@ public class CallAlphaCabServlet extends HttpServlet {
 
         }
 
-
-        RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/invoice.jsp");
-        view.forward(request, response);
     }
 
     /**
