@@ -148,12 +148,20 @@ public class UserDao {
             while (rs.next()) {
                 role = rs.getString(4).toLowerCase();
             }
-
+            
+            query("SELECT REGISTRATION FROM DRIVERS WHERE USERID =" + userID);
+            String registration = "";
+            while(rs.next()){
+                registration = rs.getString(1);
+            }
+            
             System.out.print("a------------------------------------");
 
             //remove from drivers/customer table
             switch (role) {
                 case ("driver"):
+                    update("DELETE FROM JOURNEY WHERE registration='" + registration +"'");
+
                     update("DELETE FROM DRIVERS WHERE userID=" + userID);
                     break;
                 case ("customer"):
