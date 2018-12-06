@@ -24,8 +24,8 @@
                     </tr>
                 </thead>
                 <tr>
-                    <td><%out.print(request.getAttribute("base-rate"));%></td>
-                    <td><%out.print(request.getAttribute("rate-per-mile"));%></td>
+                    <td><%out.print(String.format("£%.2f", Double.parseDouble(request.getAttribute("base-rate").toString())));%></td>
+                    <td><%out.print(String.format("£%.2f", Double.parseDouble(request.getAttribute("rate-per-mile").toString())));%></td>
                 </tr>
             </table>
             <form method="post" name="change-rates-form" action="SetRates">
