@@ -70,5 +70,9 @@ public class Demand {
     public int getCustomerid() {
         return customerid;
     }
-
+    
+    public double calculateDistance() {
+        return 4.0;
+    }
+   
 }

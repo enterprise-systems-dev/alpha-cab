@@ -21,6 +21,7 @@ INSERT INTO Users (username, password, role) VALUES('ghikmet', 'ghikmet', 'custo
 INSERT INTO Users (username, password, role) VALUES('jsmith', 'jsmith', 'driver');
 INSERT INTO Users (username, password, role) VALUES('maydin', 'maydin', 'driver');
 INSERT INTO Users (username, password, role) VALUES('mjohnson', 'mjohnson', 'driver');
+INSERT INTO Users (username, password, role) VALUES('ebrown', 'ebrown', 'customer');
 
 -- --------------------------------------------------------
 
@@ -43,7 +44,8 @@ INSERT INTO Customer (Name, Address, userid) VALUES
 ('Jim Hunter', '765 High Road, London, N12', 7),
 ('Phil Johnson', '75 Squires Lane, London, N3', 8),
 ('Saim Soyler', '2 Rosemary Ave, London, N3', 9),
-('Gul Hikmet', '31 Clifton Rd, London, N3 2SG', 10);
+('Gul Hikmet', '31 Clifton Rd, London, N3 2SG', 10),
+('Ed Brown', '3 Cecilia Close, London, N2 0UT', 14);
 
 -- --------------------------------------------------------
 --DROP Table Demands;
@@ -103,12 +105,12 @@ CREATE TABLE Journey (
 Alter table Journey add foreign key (customerid) references Customer;
 Alter table Journey add foreign key (Registration) references Drivers;
 
-INSERT INTO Journey (Name, Address, Destination, Distance, customerid, Registration, Date, Time) VALUES
-('Eva Smith', 'Finchley, London', 'King''s Cross Station, London', 5, 4, 'BN60WKA', '2015-10-14', '09:30:00'),
-('Jim Hunter', '765 High Road, London, N12', 'Heathrow Terminal 3, London', 20, 7, 'BN60WKA', '2015-10-14', '12:00:00'),
-('Jim Hunter', '765 High Road, London, N12', '120 Green Lanes, London, N13', 7, 7, 'AK52VZV', '2015-10-15', '06:00:00'),
-('Jim Hunter', '765 High Road, London, N12', '131 Stoke Newington High Road, London, N12', 8, 7, 'AK52VZV', '2015-10-15', '12:00:00'),
-('Eva Smith', 'Finchley, London', 'Luton Airport, Luton', 30, 4, 'R34AKP', '2015-10-22', '10:00:00');
+INSERT INTO Journey (Name, Address, Destination, Distance, customerid, Registration, Cost, Date, Time) VALUES
+('Eva Smith', 'Finchley, London', 'King''s Cross Station, London', 5, 4, 'BN60WKA', 15.0, '2015-10-14', '09:30:00'),
+('Jim Hunter', '765 High Road, London, N12', 'Heathrow Terminal 3, London', 20, 7, 'BN60WKA', 30.0, '2015-10-14', '12:00:00'),
+('Jim Hunter', '765 High Road, London, N12', '120 Green Lanes, London, N13', 7, 7, 'AK52VZV', 17.0,'2015-10-15', '06:00:00'),
+('Jim Hunter', '765 High Road, London, N12', '131 Stoke Newington High Road, London, N12', 8, 7, 'AK52VZV', 8.0, '2015-10-15', '12:00:00'),
+('Eva Smith', 'Finchley, London', 'Luton Airport, Luton', 30, 4, 'R34AKP', 40.0, '2015-10-22', '10:00:00');
 
 -- --------------------------------------------------------
 

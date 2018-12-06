@@ -27,6 +27,10 @@
             %>
             <form method="post" action="CallAlphaCab">
                 <div class="form-group">
+                    <label for="name-textbox">Name</label>
+                    <input type="text" class="form-control" name="name-textbox" id="name-textbox" placeholder="Enter name">
+                </div>                
+                <div class="form-group">
                     <label for="address-textbox">Address</label>
                     <input type="text" class="form-control" name="address-textbox" id="address-textbox" placeholder="Enter current address">
                 </div>

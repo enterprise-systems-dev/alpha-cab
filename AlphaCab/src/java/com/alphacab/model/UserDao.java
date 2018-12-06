@@ -5,6 +5,7 @@
  */
 package com.alphacab.model;
 
+import com.alphacab.util.JourneyCostCalculator;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
@@ -435,6 +436,32 @@ public class UserDao {
         return journeyList;
     }
 
+    public Driver getDriverById(int id) {
+
+        Driver driver = new Driver(0, "", "");
+
+        String s = "SELECT * FROM Drivers WHERE USERID = ?";
+
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement(s);
+            ps.setInt(1, id);
+            ResultSet rSet = ps.executeQuery();
+
+            while (rSet.next()) {
+                driver.setId(rSet.getInt(1));
+                driver.setName(rSet.getString(3));
+                driver.setRegistration(rSet.getString(2));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return driver;
+    }
+
     public Driver getDriverByRegistration(String registration) {
 
         Driver driver = new Driver(0, "", "");
@@ -460,6 +487,39 @@ public class UserDao {
         }
 
         return driver;
+    }
+
+    public Demand getDemandById(int id) {
+
+        String s = "SELECT * FROM Demands WHERE Id = ?";
+
+        PreparedStatement ps;
+
+        Demand demand = null;
+
+        try {
+            ps = con.prepareStatement(s);
+            ps.setInt(1, id);
+            ResultSet rSet = ps.executeQuery();
+
+            while (rSet.next()) {
+                demand = new Demand(
+                        rSet.getInt(1),
+                        rSet.getString(2),
+                        rSet.getString(3),
+                        rSet.getString(4),
+                        rSet.getDate(5),
+                        rSet.getTime(6),
+                        rSet.getString(7),
+                        rSet.getInt(8)
+                );
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return demand;
     }
 
     public List<Driver> getAvailableDrivers() {
@@ -573,10 +633,82 @@ public class UserDao {
     }
 
     public boolean setBaseRate(double base) {
+        String updateBaseRateQuery = "UPDATE Rates SET base_rate = ? WHERE id = (SELECT id FROM Rates FETCH FIRST ROW ONLY)";
+
+        PreparedStatement updateBaseRateStatement;
+        try {
+            updateBaseRateStatement = con.prepareStatement(updateBaseRateQuery);
+            updateBaseRateStatement.setDouble(1, base);
+            updateBaseRateStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return true;
     }
 
     public boolean setPerMile(double perMile) {
+        String updatePerMileQuery = "UPDATE Rates SET rate_per_mile = ? WHERE id = (SELECT id FROM Rates FETCH FIRST ROW ONLY)";
+
+        PreparedStatement updatePerMileStatement;
+
+        try {
+            updatePerMileStatement = con.prepareStatement(updatePerMileQuery);
+            updatePerMileStatement.setDouble(1, perMile);
+            updatePerMileStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return true;
+    }
+
+    public void createJourney(Driver driver, Demand demand) {
+        String insertJourneyQuery = "INSERT INTO Journey (Name, Address, Destination, Distance, customerid, Registration, Cost, Date, Time) VALUES (?,?,?,?,?,?,?,?,?)";
+        int id = getCustomerId(demand.getCustomerid());
+        PreparedStatement insertJourneyStatement;
+
+        try {
+            
+            JourneyCostCalculator costCalculator = new JourneyCostCalculator(con);
+            
+            insertJourneyStatement = con.prepareStatement(insertJourneyQuery);
+
+            insertJourneyStatement.setString(1, demand.getName());
+            insertJourneyStatement.setString(2, demand.getAddress());
+            insertJourneyStatement.setString(3, demand.getAddress());
+            insertJourneyStatement.setDouble(4, demand.calculateDistance());
+            insertJourneyStatement.setInt(5, id);
+            insertJourneyStatement.setString(6, driver.getRegistration());
+            insertJourneyStatement.setDouble(7, costCalculator.calculateCostIncVAT(demand.calculateDistance()));
+            insertJourneyStatement.setDate(8, demand.getDate());
+            insertJourneyStatement.setTime(9, demand.getTime());
+            
+            insertJourneyStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private int getCustomerId(int customerId) {
+        String s = "SELECT id FROM Customer WHERE UserId = ?";
+
+        PreparedStatement ps;
+        
+        int id = 0;
+        
+        try {
+            ps = con.prepareStatement(s);
+            ps.setInt(1, customerId);
+            ResultSet rSet = ps.executeQuery();
+
+            if (rSet.next()) {
+                id = rSet.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 }
